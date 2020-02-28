@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C09E0F924091BA4006EEFC8 /* RxTimelane in Frameworks */ = {isa = PBXBuildFile; productRef = 9C09E0F824091BA4006EEFC8 /* RxTimelane */; };
 		9C844D152409086D004D5265 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C844D142409086D004D5265 /* AppDelegate.swift */; };
 		9C844D192409086D004D5265 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C844D182409086D004D5265 /* ViewController.swift */; };
 		9C844D1C2409086D004D5265 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C844D1A2409086D004D5265 /* Main.storyboard */; };
 		9C844D1E2409086D004D5265 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C844D1D2409086D004D5265 /* Assets.xcassets */; };
 		9C844D212409086D004D5265 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C844D1F2409086D004D5265 /* LaunchScreen.storyboard */; };
 		9CC6BB462409094B00E8021F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9CC6BB452409094B00E8021F /* RxSwift */; };
-		9CC6BB492409097900E8021F /* RxTimelane in Frameworks */ = {isa = PBXBuildFile; productRef = 9CC6BB482409097900E8021F /* RxTimelane */; };
 		9CC6BB4B24090A3F00E8021F /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC6BB4A24090A3F00E8021F /* Worker.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +25,6 @@
 		9C844D1D2409086D004D5265 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C844D202409086D004D5265 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C844D222409086D004D5265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9CC6BB43240908DE00E8021F /* RxTimelane */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RxTimelane; path = ..; sourceTree = "<group>"; };
 		9CC6BB4A24090A3F00E8021F /* Worker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -35,7 +34,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CC6BB462409094B00E8021F /* RxSwift in Frameworks */,
-				9CC6BB492409097900E8021F /* RxTimelane in Frameworks */,
+				9C09E0F924091BA4006EEFC8 /* RxTimelane in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,7 +44,6 @@
 		9C844D082409086D004D5265 = {
 			isa = PBXGroup;
 			children = (
-				9CC6BB43240908DE00E8021F /* RxTimelane */,
 				9C844D132409086D004D5265 /* RxTimelaneTestApp */,
 				9C844D122409086D004D5265 /* Products */,
 				9CC6BB472409097900E8021F /* Frameworks */,
@@ -107,7 +105,7 @@
 			name = RxTimelaneTestApp;
 			packageProductDependencies = (
 				9CC6BB452409094B00E8021F /* RxSwift */,
-				9CC6BB482409097900E8021F /* RxTimelane */,
+				9C09E0F824091BA4006EEFC8 /* RxTimelane */,
 			);
 			productName = RxTimelaneTestApp;
 			productReference = 9C844D112409086D004D5265 /* RxTimelaneTestApp.app */;
@@ -139,6 +137,7 @@
 			mainGroup = 9C844D082409086D004D5265;
 			packageReferences = (
 				9CC6BB442409094B00E8021F /* XCRemoteSwiftPackageReference "RxSwift" */,
+				9C09E0F724091BA4006EEFC8 /* XCRemoteSwiftPackageReference "RxTimelane" */,
 			);
 			productRefGroup = 9C844D122409086D004D5265 /* Products */;
 			projectDirPath = "";
@@ -369,6 +368,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9C09E0F724091BA4006EEFC8 /* XCRemoteSwiftPackageReference "RxTimelane" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/icanzilb/RxTimelane";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		9CC6BB442409094B00E8021F /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -380,14 +387,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9C09E0F824091BA4006EEFC8 /* RxTimelane */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C09E0F724091BA4006EEFC8 /* XCRemoteSwiftPackageReference "RxTimelane" */;
+			productName = RxTimelane;
+		};
 		9CC6BB452409094B00E8021F /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9CC6BB442409094B00E8021F /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
-		};
-		9CC6BB482409097900E8021F /* RxTimelane */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RxTimelane;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

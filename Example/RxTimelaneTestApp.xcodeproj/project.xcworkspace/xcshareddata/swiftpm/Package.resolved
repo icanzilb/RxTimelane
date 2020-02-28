@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "RxTimelane",
+        "repositoryURL": "https://github.com/icanzilb/RxTimelane",
+        "state": {
+          "branch": null,
+          "revision": "3cc7dd5fcb8e8bcf8822ee178cda71f20b8fbccc",
+          "version": "1.0.0"
+        }
+      },
+      {
         "package": "TimelaneCore",
         "repositoryURL": "https://github.com/icanzilb/TimelaneCore",
         "state": {
