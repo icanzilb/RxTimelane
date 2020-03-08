@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
         "state": {
           "branch": null,
-          "revision": "b3e888b4972d9bc76495dd74d30a8c7fad4b9395",
-          "version": "5.0.1"
+          "revision": "c1bd31b397d87a54467af4161dde9d6b27720c19",
+          "version": "5.1.0"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/icanzilb/RxTimelane",
         "state": {
           "branch": null,
-          "revision": "36b4d1e5263c307251362cd0f14d8a98a8a8eb82",
-          "version": "1.0.0"
+          "revision": "dfe3d9f3d5a24905e0a7abb48ff4095900d9ea59",
+          "version": "1.0.1"
         }
       },
       {
