@@ -83,7 +83,9 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         sub = countdownSubject
-            .lane("Countdown", filter: [.event])
+            .lane("Countdown", filter: [.event]) {
+                "Count: \($0)"
+            }
             .map { "Tap me \($0) more times" }
             .subscribe(onNext: {
                 [weak self] in self?.countdownButton.setTitle($0, for: .normal)
