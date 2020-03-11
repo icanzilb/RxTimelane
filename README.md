@@ -2,18 +2,24 @@
 
 ![Timelane Icon](etc/Icon_128x128@2x.png)
 
-**RxTimelane** provides an RxSwift bindings for profiling RxSwift code with the Timelane Instrument.
+**RxTimelane** provides RxSwift bindings for profiling RxSwift code with the Timelane Instrument.
 
 ![Timelane Instrument](etc/timelane.png)
 
-Contents:
+<p align="center">
+    <img src="https://img.shields.io/badge/Swift-5.2-orange.svg" />
+    <img src="https://img.shields.io/cocoapods/v/RxTimelane.svg" />
+    <img src="https://img.shields.io/cocoapods/l/RxTimelane.svg" />
+    <img src="https://img.shields.io/cocoapods/p/RxTimelane.svg" />
+</p>
 
-1. [Usage](#Usage)
-2. [Reference](#Reference)
-3. [Installation](#Installation)
-4. [Demo](#Demo)
-5. [Todo](#Todo)
-6. [License](#License)
+#### Contents:
+
+ - [Usage](#Usage)
+ - [API Reference](#Reference)
+ - [Installation](#Installation)
+ - [Demo](#Demo)
+ - [License](#License)
 
 # Usage
 
@@ -43,7 +49,7 @@ Inspect your subscriptions on the timeline:
 
 For a more detailed walkthrough go to [http://timelane.tools](http://timelane.tools).
 
-# Reference
+# API Reference
 
 ## `lane(_:filter:)`
 
@@ -73,17 +79,30 @@ I . Automatically in Xcode:
 II . Manually in your **Package.swift** file add:
 
 ```swift
-.package(url: "https://github.com/icanzilb/RxTimelane", .from("1.0.1"))
+.package(url: "https://github.com/icanzilb/RxTimelane", .from("1.0.3"))
 ```
+
+## CocoaPods
+
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate **TimelaneCombine** into your Xcode project using CocoaPods, add it to your `Podfile`:
+
+```ruby
+pod 'RxTimelane', '~> 1.0.3'
+```
+
+## Carthage
+
+ [Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate **TimelaneCombine** into your Xcode project using Carthage, add it in your `Cartfile`:
+
+ ```ogdl
+ github "icanzilb/RxTimelane" "1.0.3"
+ ```
 
 # Demo
 
-The Timelane package contains a demo app at: https://github.com/icanzilb/timelane.
+This repo contains a simple demo app in the [Example](https://github.com/icanzilb/RxTimelane/tree/master/Example) sub-folder.
 
-# Todo
-
-- [ ] CocoaPods
-- [ ] Carthage
+![Timelane demo app](etc/demo.png)
 
 # License
 
