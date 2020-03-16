@@ -7,12 +7,6 @@ import Foundation
 import RxSwift
 import TimelaneCore
 
-public struct RxTimelane {
-    public enum LaneType: Int, CaseIterable {
-      case subscription, event
-    }
-}
-
 fileprivate let lock = NSLock()
 
 /// The `lane` operator logs the subscription and its events to the Timelane Instrument.
@@ -28,7 +22,7 @@ fileprivate let lock = NSLock()
 ///   - value: The value emitted by the subscription
 public extension ObservableType {
     func lane(_ name: String,
-              filter: Set<RxTimelane.LaneType> = Set(RxTimelane.LaneType.allCases),
+              filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
               transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) }) -> Observable<Element> {
