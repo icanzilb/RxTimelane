@@ -21,6 +21,8 @@ fileprivate let lock = NSLock()
 ///                     it might be more useful to report the count of elements if there are a lot of them.
 ///   - value: The value emitted by the subscription
 public extension ObservableType {
+    
+    @available(macOS 10.14, iOS 12, tvOS 12, watchOS 5, *)
     func lane(_ name: String,
               filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
               file: StaticString = #file,

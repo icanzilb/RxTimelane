@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'RxTimelane'
-  s.version          = '1.0.4'
+  s.version          = '1.0.5'
   s.summary          = 'The RxSwift Timelane package'
 
   s.description      = <<-DESC
@@ -20,6 +20,8 @@ The RxSwift logging package for the Timelane Instrument.
   s.watchos.deployment_target = '3.0'
   s.tvos.deployment_target = '9.0'
   
-  s.source_files = 'Sources/**/*.swift'  
+  s.source_files = 'Sources/**/*.swift'
   s.frameworks = 'Foundation'
+  s.dependency "RxSwift", "~> 5.1"
+  s.dependency "TimelaneCore", "~> 1.0"
 end
