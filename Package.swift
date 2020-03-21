@@ -26,7 +26,7 @@ let package = Package(
             dependencies: ["RxSwift", "TimelaneCore"]),
         .testTarget(
             name: "RxTimelaneTests",
-            dependencies: ["RxTimelane"]),
+            dependencies: ["RxTimelane", "RxSwift", "TimelaneCoreTestUtils"]),
     ],
     swiftLanguageVersions: [.v5]
 )
