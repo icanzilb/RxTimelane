@@ -27,11 +27,12 @@ public extension ObservableType {
               filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
-              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) }) -> Observable<Element> {
+              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
+              logger: @escaping Timelane.Logger) -> Observable<Element> {
       
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
-        let subscription = Timelane.Subscription(name: name)
+        let subscription = Timelane.Subscription(name: name, logger: logger)
         
         var terminated = false
         
@@ -41,6 +42,11 @@ public extension ObservableType {
             }
         },
         onError: { error in
+            lock.lock()
+            defer { lock.unlock() }
+
+            terminated = true
+            
             if filter.contains(.subscription) {
                 subscription.end(state: .error(error.localizedDescription))
             }
