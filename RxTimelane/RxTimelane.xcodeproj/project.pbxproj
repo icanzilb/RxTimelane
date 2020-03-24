@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC15C5FC242AA86F00D8F7B5 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BC15C5FB242AA86F00D8F7B5 /* RxSwift */; };
+		BC15C5FF242AA8C500D8F7B5 /* TimelaneCore in Frameworks */ = {isa = PBXBuildFile; productRef = BC15C5FE242AA8C500D8F7B5 /* TimelaneCore */; };
+		BC15C602242AAA6300D8F7B5 /* RxTimelane in Frameworks */ = {isa = PBXBuildFile; productRef = BC15C601242AAA6300D8F7B5 /* RxTimelane */; };
 		BC38571F242A36E2006BC2D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC38571E242A36E2006BC2D8 /* AppDelegate.swift */; };
 		BC385721242A36E2006BC2D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC385720242A36E2006BC2D8 /* SceneDelegate.swift */; };
 		BC385723242A36E2006BC2D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC385722242A36E2006BC2D8 /* ViewController.swift */; };
@@ -14,12 +17,6 @@
 		BC385728242A36E4006BC2D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC385727242A36E4006BC2D8 /* Assets.xcassets */; };
 		BC38572B242A36E4006BC2D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC385729242A36E4006BC2D8 /* LaunchScreen.storyboard */; };
 		BC385731242A3723006BC2D8 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC385730242A3723006BC2D8 /* Worker.swift */; };
-		BC385737242A3774006BC2D8 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D92E242972B40068D353 /* RxSwift.framework */; };
-		BC385738242A3774006BC2D8 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D92E242972B40068D353 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BC38573F242A3CBA006BC2D8 /* RxTimelane.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEA4D692429714A00B8E52C /* RxTimelane.framework */; };
-		BC385740242A3CBA006BC2D8 /* RxTimelane.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BCEA4D692429714A00B8E52C /* RxTimelane.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BC385743242A3DE5006BC2D8 /* TimelaneCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D932242972B70068D353 /* TimelaneCore.framework */; };
-		BC385744242A3DE5006BC2D8 /* TimelaneCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D932242972B70068D353 /* TimelaneCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BC94D92F242972B40068D353 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D92E242972B40068D353 /* RxSwift.framework */; };
 		BC94D930242972B40068D353 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D92E242972B40068D353 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BC94D933242972B70068D353 /* TimelaneCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D932242972B70068D353 /* TimelaneCore.framework */; platformFilter = ios; };
@@ -28,30 +25,7 @@
 		BCEA4D752429719E00B8E52C /* RxTimelane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEA4D742429719E00B8E52C /* RxTimelane.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		BC385741242A3CBA006BC2D8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BCEA4D602429714A00B8E52C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BCEA4D682429714A00B8E52C;
-			remoteInfo = RxTimelane;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
-		BC385736242A3740006BC2D8 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				BC385738242A3774006BC2D8 /* RxSwift.framework in Embed Frameworks */,
-				BC385740242A3CBA006BC2D8 /* RxTimelane.framework in Embed Frameworks */,
-				BC385744242A3DE5006BC2D8 /* TimelaneCore.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		BC94D931242972B40068D353 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -89,9 +63,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC385737242A3774006BC2D8 /* RxSwift.framework in Frameworks */,
-				BC38573F242A3CBA006BC2D8 /* RxTimelane.framework in Frameworks */,
-				BC385743242A3DE5006BC2D8 /* TimelaneCore.framework in Frameworks */,
+				BC15C5FF242AA8C500D8F7B5 /* TimelaneCore in Frameworks */,
+				BC15C602242AAA6300D8F7B5 /* RxTimelane in Frameworks */,
+				BC15C5FC242AA86F00D8F7B5 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,14 +155,17 @@
 				BC385718242A36E2006BC2D8 /* Sources */,
 				BC385719242A36E2006BC2D8 /* Frameworks */,
 				BC38571A242A36E2006BC2D8 /* Resources */,
-				BC385736242A3740006BC2D8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				BC385742242A3CBA006BC2D8 /* PBXTargetDependency */,
 			);
 			name = RxTimelaneExample;
+			packageProductDependencies = (
+				BC15C5FB242AA86F00D8F7B5 /* RxSwift */,
+				BC15C5FE242AA8C500D8F7B5 /* TimelaneCore */,
+				BC15C601242AAA6300D8F7B5 /* RxTimelane */,
+			);
 			productName = RxTimelaneExample;
 			productReference = BC38571C242A36E2006BC2D8 /* RxTimelaneExample.app */;
 			productType = "com.apple.product-type.application";
@@ -240,6 +217,11 @@
 				Base,
 			);
 			mainGroup = BCEA4D5F2429714A00B8E52C;
+			packageReferences = (
+				BC15C5FA242AA86F00D8F7B5 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				BC15C5FD242AA8C500D8F7B5 /* XCRemoteSwiftPackageReference "TimelaneCore" */,
+				BC15C600242AAA6300D8F7B5 /* XCRemoteSwiftPackageReference "RxTimelane" */,
+			);
 			productRefGroup = BCEA4D6A2429714A00B8E52C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -291,14 +273,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		BC385742242A3CBA006BC2D8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BCEA4D682429714A00B8E52C /* RxTimelane */;
-			targetProxy = BC385741242A3CBA006BC2D8 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BC385724242A36E2006BC2D8 /* Main.storyboard */ = {
@@ -570,6 +544,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BC15C5FA242AA86F00D8F7B5 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+		BC15C5FD242AA8C500D8F7B5 /* XCRemoteSwiftPackageReference "TimelaneCore" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/icanzilb/TimelaneCore";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
+			};
+		};
+		BC15C600242AAA6300D8F7B5 /* XCRemoteSwiftPackageReference "RxTimelane" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/icanzilb/RxTimelane";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BC15C5FB242AA86F00D8F7B5 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC15C5FA242AA86F00D8F7B5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		BC15C5FE242AA8C500D8F7B5 /* TimelaneCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC15C5FD242AA8C500D8F7B5 /* XCRemoteSwiftPackageReference "TimelaneCore" */;
+			productName = TimelaneCore;
+		};
+		BC15C601242AAA6300D8F7B5 /* RxTimelane */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC15C600242AAA6300D8F7B5 /* XCRemoteSwiftPackageReference "RxTimelane" */;
+			productName = RxTimelane;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BCEA4D602429714A00B8E52C /* Project object */;
 }
