@@ -16,6 +16,10 @@
 		BC385731242A3723006BC2D8 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC385730242A3723006BC2D8 /* Worker.swift */; };
 		BC385737242A3774006BC2D8 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D92E242972B40068D353 /* RxSwift.framework */; };
 		BC385738242A3774006BC2D8 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D92E242972B40068D353 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BC38573F242A3CBA006BC2D8 /* RxTimelane.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEA4D692429714A00B8E52C /* RxTimelane.framework */; };
+		BC385740242A3CBA006BC2D8 /* RxTimelane.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BCEA4D692429714A00B8E52C /* RxTimelane.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BC385743242A3DE5006BC2D8 /* TimelaneCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D932242972B70068D353 /* TimelaneCore.framework */; };
+		BC385744242A3DE5006BC2D8 /* TimelaneCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D932242972B70068D353 /* TimelaneCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BC94D92F242972B40068D353 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D92E242972B40068D353 /* RxSwift.framework */; };
 		BC94D930242972B40068D353 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D92E242972B40068D353 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BC94D933242972B70068D353 /* TimelaneCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D932242972B70068D353 /* TimelaneCore.framework */; platformFilter = ios; };
@@ -23,6 +27,16 @@
 		BCEA4D6E2429714A00B8E52C /* RxTimelane.h in Headers */ = {isa = PBXBuildFile; fileRef = BCEA4D6C2429714A00B8E52C /* RxTimelane.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCEA4D752429719E00B8E52C /* RxTimelane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEA4D742429719E00B8E52C /* RxTimelane.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BC385741242A3CBA006BC2D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BCEA4D602429714A00B8E52C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BCEA4D682429714A00B8E52C;
+			remoteInfo = RxTimelane;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		BC385736242A3740006BC2D8 /* Embed Frameworks */ = {
@@ -32,6 +46,8 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BC385738242A3774006BC2D8 /* RxSwift.framework in Embed Frameworks */,
+				BC385740242A3CBA006BC2D8 /* RxTimelane.framework in Embed Frameworks */,
+				BC385744242A3DE5006BC2D8 /* TimelaneCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,6 +90,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC385737242A3774006BC2D8 /* RxSwift.framework in Frameworks */,
+				BC38573F242A3CBA006BC2D8 /* RxTimelane.framework in Frameworks */,
+				BC385743242A3DE5006BC2D8 /* TimelaneCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +186,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BC385742242A3CBA006BC2D8 /* PBXTargetDependency */,
 			);
 			name = RxTimelaneExample;
 			productName = RxTimelaneExample;
@@ -272,6 +291,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BC385742242A3CBA006BC2D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BCEA4D682429714A00B8E52C /* RxTimelane */;
+			targetProxy = BC385741242A3CBA006BC2D8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BC385724242A36E2006BC2D8 /* Main.storyboard */ = {
