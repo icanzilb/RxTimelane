@@ -22,7 +22,7 @@ class ViewController: UITableViewController {
         failingSpinner.isHidden = false
         
         Observable<String>.worker(duration: 3.0, error: MyError.test)
-            .lane("Will Fail", filter: [.subscription], logger: Timelane.defaultLogger)
+            .lane("Will Fail", filter: [.subscription])
             .subscribe(onNext: { value in
                 NSLog("output: \(value)")
             }, onError: { [weak self] error in
@@ -40,7 +40,7 @@ class ViewController: UITableViewController {
         completingSpinner.isHidden = false
         
         Observable<String>.worker(duration: 2.0)
-            .lane("Will Complete", filter: [.subscription], logger: Timelane.defaultLogger)
+            .lane("Will Complete", filter: [.subscription])
             .subscribe(onNext: { value in
                 NSLog("output: \(value)")
             }, onError: { [weak self] error in
@@ -58,7 +58,7 @@ class ViewController: UITableViewController {
         cancellingSpinner.isHidden = false
         
         var willCancel: Disposable? = Observable<String>.worker(duration: 5.0)
-            .lane("Will Cancel", filter: [.subscription], logger: Timelane.defaultLogger)
+            .lane("Will Cancel", filter: [.subscription])
             .subscribe(onNext: { value in
                 NSLog("output: \(value)")
             }, onError: { [weak self] error in
@@ -84,7 +84,9 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         sub = countdownSubject
-            .lane("Countdown", filter: [.event], logger: Timelane.defaultLogger)
+            .lane("Countdown", filter: [.event]) {
+                "Count: \($0)"
+            }
         .map { "Tap me \($0) more times" }
         .subscribe(onNext: {
             [weak self] in self?.countdownButton.setTitle($0, for: .normal)
