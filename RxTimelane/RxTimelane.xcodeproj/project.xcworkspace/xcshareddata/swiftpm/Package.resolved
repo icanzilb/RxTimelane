@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "RxSwift",
+        "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "c1bd31b397d87a54467af4161dde9d6b27720c19",
+          "version": "5.1.0"
+        }
+      },
+      {
+        "package": "RxTimelane",
+        "repositoryURL": "https://github.com/icanzilb/RxTimelane",
+        "state": {
+          "branch": null,
+          "revision": "ec0951de87e71c5b48ccd44a28bc4742dc263611",
+          "version": "1.0.5"
+        }
+      },
+      {
+        "package": "TimelaneCore",
+        "repositoryURL": "https://github.com/icanzilb/TimelaneCore",
+        "state": {
+          "branch": null,
+          "revision": "042240b3ca82904eed84bb4e54016a795c9386e2",
+          "version": "1.0.6"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
