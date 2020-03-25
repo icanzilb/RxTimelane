@@ -21,10 +21,16 @@ jobs:
     runs-on: macOS-latest
 
     steps:
+    - uses: actions/cache@v1
+      with:
+        path: RxTimelane/Carthage
+        key: ${{ runner.os }}-carthage-${{ hashFiles('RxTimelane/Cartfile.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-carthage-
+      
     - uses: actions/checkout@v2
     - name: Check Carthage build
       run: |
         cd RxTimelane
-        carthage bootstrap --no-use-binaries
-        carthage build --no-skip-current --no-use-binaries
+        carthage build --cache-builds
 
