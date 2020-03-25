@@ -24,7 +24,7 @@ jobs:
     - uses: actions/cache@v1
       with:
         path: RxTimelane/Carthage
-        key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+        key: ${{ runner.os }}-carthage-${{ hashFiles('Cartfile.resolved') }}
         restore-keys: |
           ${{ runner.os }}-carthage-
       
