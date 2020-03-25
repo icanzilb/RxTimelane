@@ -21,10 +21,24 @@ jobs:
     runs-on: macOS-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Check Carthage build
-      run: |
-        cd RxTimelane
-        carthage bootstrap
-        carthage build --no-skip-current
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Check Carthage build
+        run: |
+          cd RxTimelane
+          carthage bootstrap
+          carthage build --no-skip-current
+
+      - name: Cache Carthage
+        id: cache-carthage
+        uses: actions/cache@v1.1.0
+        with:
+          path: Carthage
+          key: ${{ runner.os }}-cache-${{ hashFiles('**/Cartfile.resolved') }}
+          restore-keys: ${{ runner.os }}-cache-
+
+      - name: Update Carthage
+        if: steps.cache-carthage.outputs.cache-hit != 'true'
+        run: carthage update
 
