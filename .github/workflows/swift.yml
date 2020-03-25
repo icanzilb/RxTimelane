@@ -21,10 +21,10 @@ jobs:
     runs-on: macOS-latest
 
     steps:
-      - name: Carthage Checkout
-        uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+    - name: Check Carthage build
+      run: |
+        cd RxTimelane
+        carthage bootstrap
+        carthage build --no-skip-current
 
-      - name: Carthage Build
-        run: |
-          cd RxTimelane
-          carthage build --cache-builds
