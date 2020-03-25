@@ -21,14 +21,6 @@ jobs:
     runs-on: macOS-latest
 
     steps:
-      - name: Hit Carthage Cache
-        uses: actions/cache@v1
-        with:
-          path: Carthage
-          key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-carthage-
-      
       - name: Carthage Checkout
         uses: actions/checkout@v2
 
@@ -36,4 +28,3 @@ jobs:
         run: |
           cd RxTimelane
           carthage build --cache-builds
-
