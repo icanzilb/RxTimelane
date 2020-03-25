@@ -1,0 +1,594 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BC15C5FC242AA86F00D8F7B5 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BC15C5FB242AA86F00D8F7B5 /* RxSwift */; };
+		BC15C5FF242AA8C500D8F7B5 /* TimelaneCore in Frameworks */ = {isa = PBXBuildFile; productRef = BC15C5FE242AA8C500D8F7B5 /* TimelaneCore */; };
+		BC15C602242AAA6300D8F7B5 /* RxTimelane in Frameworks */ = {isa = PBXBuildFile; productRef = BC15C601242AAA6300D8F7B5 /* RxTimelane */; };
+		BC38571F242A36E2006BC2D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC38571E242A36E2006BC2D8 /* AppDelegate.swift */; };
+		BC385721242A36E2006BC2D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC385720242A36E2006BC2D8 /* SceneDelegate.swift */; };
+		BC385723242A36E2006BC2D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC385722242A36E2006BC2D8 /* ViewController.swift */; };
+		BC385726242A36E2006BC2D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC385724242A36E2006BC2D8 /* Main.storyboard */; };
+		BC385728242A36E4006BC2D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC385727242A36E4006BC2D8 /* Assets.xcassets */; };
+		BC38572B242A36E4006BC2D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC385729242A36E4006BC2D8 /* LaunchScreen.storyboard */; };
+		BC385731242A3723006BC2D8 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC385730242A3723006BC2D8 /* Worker.swift */; };
+		BC94D92F242972B40068D353 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D92E242972B40068D353 /* RxSwift.framework */; };
+		BC94D930242972B40068D353 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D92E242972B40068D353 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BC94D933242972B70068D353 /* TimelaneCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D932242972B70068D353 /* TimelaneCore.framework */; platformFilter = ios; };
+		BC94D934242972B70068D353 /* TimelaneCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D932242972B70068D353 /* TimelaneCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BCEA4D6E2429714A00B8E52C /* RxTimelane.h in Headers */ = {isa = PBXBuildFile; fileRef = BCEA4D6C2429714A00B8E52C /* RxTimelane.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCEA4D752429719E00B8E52C /* RxTimelane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEA4D742429719E00B8E52C /* RxTimelane.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BC94D931242972B40068D353 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BC94D934242972B70068D353 /* TimelaneCore.framework in Embed Frameworks */,
+				BC94D930242972B40068D353 /* RxSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BC38571C242A36E2006BC2D8 /* RxTimelaneExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxTimelaneExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC38571E242A36E2006BC2D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BC385720242A36E2006BC2D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		BC385722242A36E2006BC2D8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BC385725242A36E2006BC2D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BC385727242A36E4006BC2D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BC38572A242A36E4006BC2D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BC38572C242A36E4006BC2D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC385730242A3723006BC2D8 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
+		BC94D92E242972B40068D353 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		BC94D932242972B70068D353 /* TimelaneCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TimelaneCore.framework; path = Carthage/Build/iOS/TimelaneCore.framework; sourceTree = "<group>"; };
+		BCEA4D692429714A00B8E52C /* RxTimelane.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxTimelane.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCEA4D6C2429714A00B8E52C /* RxTimelane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxTimelane.h; sourceTree = "<group>"; };
+		BCEA4D6D2429714A00B8E52C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BCEA4D742429719E00B8E52C /* RxTimelane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RxTimelane.swift; path = ../../Sources/RxTimelane/RxTimelane.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BC385719242A36E2006BC2D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC15C5FF242AA8C500D8F7B5 /* TimelaneCore in Frameworks */,
+				BC15C602242AAA6300D8F7B5 /* RxTimelane in Frameworks */,
+				BC15C5FC242AA86F00D8F7B5 /* RxSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCEA4D662429714A00B8E52C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC94D933242972B70068D353 /* TimelaneCore.framework in Frameworks */,
+				BC94D92F242972B40068D353 /* RxSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BC38571D242A36E2006BC2D8 /* RxTimelaneExample */ = {
+			isa = PBXGroup;
+			children = (
+				BC38571E242A36E2006BC2D8 /* AppDelegate.swift */,
+				BC385720242A36E2006BC2D8 /* SceneDelegate.swift */,
+				BC385722242A36E2006BC2D8 /* ViewController.swift */,
+				BC385730242A3723006BC2D8 /* Worker.swift */,
+				BC385724242A36E2006BC2D8 /* Main.storyboard */,
+				BC385727242A36E4006BC2D8 /* Assets.xcassets */,
+				BC385729242A36E4006BC2D8 /* LaunchScreen.storyboard */,
+				BC38572C242A36E4006BC2D8 /* Info.plist */,
+			);
+			path = RxTimelaneExample;
+			sourceTree = "<group>";
+		};
+		BC94D92D242972B40068D353 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BC94D932242972B70068D353 /* TimelaneCore.framework */,
+				BC94D92E242972B40068D353 /* RxSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BCEA4D5F2429714A00B8E52C = {
+			isa = PBXGroup;
+			children = (
+				BCEA4D6B2429714A00B8E52C /* RxTimelane */,
+				BC38571D242A36E2006BC2D8 /* RxTimelaneExample */,
+				BCEA4D6A2429714A00B8E52C /* Products */,
+				BC94D92D242972B40068D353 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		BCEA4D6A2429714A00B8E52C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BCEA4D692429714A00B8E52C /* RxTimelane.framework */,
+				BC38571C242A36E2006BC2D8 /* RxTimelaneExample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BCEA4D6B2429714A00B8E52C /* RxTimelane */ = {
+			isa = PBXGroup;
+			children = (
+				BCEA4D742429719E00B8E52C /* RxTimelane.swift */,
+				BCEA4D6C2429714A00B8E52C /* RxTimelane.h */,
+				BCEA4D6D2429714A00B8E52C /* Info.plist */,
+			);
+			path = RxTimelane;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		BCEA4D642429714A00B8E52C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCEA4D6E2429714A00B8E52C /* RxTimelane.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		BC38571B242A36E2006BC2D8 /* RxTimelaneExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC38572F242A36E4006BC2D8 /* Build configuration list for PBXNativeTarget "RxTimelaneExample" */;
+			buildPhases = (
+				BC385718242A36E2006BC2D8 /* Sources */,
+				BC385719242A36E2006BC2D8 /* Frameworks */,
+				BC38571A242A36E2006BC2D8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RxTimelaneExample;
+			packageProductDependencies = (
+				BC15C5FB242AA86F00D8F7B5 /* RxSwift */,
+				BC15C5FE242AA8C500D8F7B5 /* TimelaneCore */,
+				BC15C601242AAA6300D8F7B5 /* RxTimelane */,
+			);
+			productName = RxTimelaneExample;
+			productReference = BC38571C242A36E2006BC2D8 /* RxTimelaneExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BCEA4D682429714A00B8E52C /* RxTimelane */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCEA4D712429714A00B8E52C /* Build configuration list for PBXNativeTarget "RxTimelane" */;
+			buildPhases = (
+				BCEA4D642429714A00B8E52C /* Headers */,
+				BCEA4D652429714A00B8E52C /* Sources */,
+				BCEA4D662429714A00B8E52C /* Frameworks */,
+				BCEA4D672429714A00B8E52C /* Resources */,
+				BC94D931242972B40068D353 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RxTimelane;
+			productName = RxTimelane;
+			productReference = BCEA4D692429714A00B8E52C /* RxTimelane.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BCEA4D602429714A00B8E52C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Marin Todorov";
+				TargetAttributes = {
+					BC38571B242A36E2006BC2D8 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					BCEA4D682429714A00B8E52C = {
+						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
+					};
+				};
+			};
+			buildConfigurationList = BCEA4D632429714A00B8E52C /* Build configuration list for PBXProject "RxTimelane" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BCEA4D5F2429714A00B8E52C;
+			packageReferences = (
+				BC15C5FA242AA86F00D8F7B5 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				BC15C5FD242AA8C500D8F7B5 /* XCRemoteSwiftPackageReference "TimelaneCore" */,
+				BC15C600242AAA6300D8F7B5 /* XCRemoteSwiftPackageReference "RxTimelane" */,
+			);
+			productRefGroup = BCEA4D6A2429714A00B8E52C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BCEA4D682429714A00B8E52C /* RxTimelane */,
+				BC38571B242A36E2006BC2D8 /* RxTimelaneExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BC38571A242A36E2006BC2D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC38572B242A36E4006BC2D8 /* LaunchScreen.storyboard in Resources */,
+				BC385728242A36E4006BC2D8 /* Assets.xcassets in Resources */,
+				BC385726242A36E2006BC2D8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCEA4D672429714A00B8E52C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BC385718242A36E2006BC2D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC385723242A36E2006BC2D8 /* ViewController.swift in Sources */,
+				BC385731242A3723006BC2D8 /* Worker.swift in Sources */,
+				BC38571F242A36E2006BC2D8 /* AppDelegate.swift in Sources */,
+				BC385721242A36E2006BC2D8 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCEA4D652429714A00B8E52C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCEA4D752429719E00B8E52C /* RxTimelane.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BC385724242A36E2006BC2D8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BC385725242A36E2006BC2D8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BC385729242A36E4006BC2D8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BC38572A242A36E4006BC2D8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BC38572D242A36E4006BC2D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = RxTimelaneExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.marintodorov.RxTimelaneExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BC38572E242A36E4006BC2D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = RxTimelaneExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.marintodorov.RxTimelaneExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BCEA4D6F2429714A00B8E52C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BCEA4D702429714A00B8E52C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		BCEA4D722429714A00B8E52C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = RxTimelane/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.marintodorov.RxTimelane;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BCEA4D732429714A00B8E52C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = RxTimelane/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.marintodorov.RxTimelane;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BC38572F242A36E4006BC2D8 /* Build configuration list for PBXNativeTarget "RxTimelaneExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC38572D242A36E4006BC2D8 /* Debug */,
+				BC38572E242A36E4006BC2D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCEA4D632429714A00B8E52C /* Build configuration list for PBXProject "RxTimelane" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCEA4D6F2429714A00B8E52C /* Debug */,
+				BCEA4D702429714A00B8E52C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCEA4D712429714A00B8E52C /* Build configuration list for PBXNativeTarget "RxTimelane" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCEA4D722429714A00B8E52C /* Debug */,
+				BCEA4D732429714A00B8E52C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BC15C5FA242AA86F00D8F7B5 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+		BC15C5FD242AA8C500D8F7B5 /* XCRemoteSwiftPackageReference "TimelaneCore" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/icanzilb/TimelaneCore";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
+			};
+		};
+		BC15C600242AAA6300D8F7B5 /* XCRemoteSwiftPackageReference "RxTimelane" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/icanzilb/RxTimelane";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BC15C5FB242AA86F00D8F7B5 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC15C5FA242AA86F00D8F7B5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		BC15C5FE242AA8C500D8F7B5 /* TimelaneCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC15C5FD242AA8C500D8F7B5 /* XCRemoteSwiftPackageReference "TimelaneCore" */;
+			productName = TimelaneCore;
+		};
+		BC15C601242AAA6300D8F7B5 /* RxTimelane */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC15C600242AAA6300D8F7B5 /* XCRemoteSwiftPackageReference "RxTimelane" */;
+			productName = RxTimelane;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = BCEA4D602429714A00B8E52C /* Project object */;
+}

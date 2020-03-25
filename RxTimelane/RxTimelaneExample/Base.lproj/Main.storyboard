@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7KT-Et-afk">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="gTn-bl-TIN">
+            <objects>
+                <tableViewController storyboardIdentifier="ViewController" id="7KT-Et-afk" customClass="ViewController" customModule="RxTimelaneExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="3fN-50-o0e">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <sections>
+                            <tableViewSection headerTitle="Subscriptions" id="xBh-mr-cTF">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="pSu-1R-8NL">
+                                        <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pSu-1R-8NL" id="ll2-LE-juj">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DXd-Fx-6hH">
+                                                    <rect key="frame" x="120.5" y="7" width="133" height="30"/>
+                                                    <state key="normal" title="Failing subscription"/>
+                                                    <connections>
+                                                        <action selector="doFailingSubscription:" destination="7KT-Et-afk" eventType="touchUpInside" id="aP2-oc-jTg"/>
+                                                    </connections>
+                                                </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="mRm-eA-3Yn">
+                                                    <rect key="frame" x="334" y="12" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="DXd-Fx-6hH" firstAttribute="centerX" secondItem="ll2-LE-juj" secondAttribute="centerX" id="8mM-L6-lMZ"/>
+                                                <constraint firstItem="mRm-eA-3Yn" firstAttribute="trailing" secondItem="ll2-LE-juj" secondAttribute="trailingMargin" id="Onb-xZ-jSb"/>
+                                                <constraint firstItem="mRm-eA-3Yn" firstAttribute="centerY" secondItem="ll2-LE-juj" secondAttribute="centerY" id="jTT-hP-Ei4"/>
+                                                <constraint firstItem="DXd-Fx-6hH" firstAttribute="centerY" secondItem="ll2-LE-juj" secondAttribute="centerY" id="pCX-ld-BFj"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="OjK-k2-tdn">
+                                        <rect key="frame" x="20" y="99" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OjK-k2-tdn" id="NiU-PB-kXM">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hrb-uL-BlP">
+                                                    <rect key="frame" x="103" y="7" width="168" height="30"/>
+                                                    <state key="normal" title="Completing subscription"/>
+                                                    <connections>
+                                                        <action selector="doCompletingSubscription:" destination="7KT-Et-afk" eventType="touchUpInside" id="lbb-65-9Cw"/>
+                                                    </connections>
+                                                </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="y7L-by-Wfe">
+                                                    <rect key="frame" x="334" y="12" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hrb-uL-BlP" firstAttribute="centerX" secondItem="NiU-PB-kXM" secondAttribute="centerX" id="DYY-xW-83I"/>
+                                                <constraint firstItem="y7L-by-Wfe" firstAttribute="trailing" secondItem="NiU-PB-kXM" secondAttribute="trailingMargin" id="cFZ-cA-qe2"/>
+                                                <constraint firstItem="y7L-by-Wfe" firstAttribute="centerY" secondItem="NiU-PB-kXM" secondAttribute="centerY" id="hTy-ho-eTg"/>
+                                                <constraint firstItem="hrb-uL-BlP" firstAttribute="centerY" secondItem="NiU-PB-kXM" secondAttribute="centerY" id="tgc-GV-Cad"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="cvi-j8-UWo">
+                                        <rect key="frame" x="20" y="142.5" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cvi-j8-UWo" id="NkR-i8-2dT">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRY-Fk-nHF">
+                                                    <rect key="frame" x="106.5" y="7" width="161" height="30"/>
+                                                    <state key="normal" title="Cancelling subscription"/>
+                                                    <connections>
+                                                        <action selector="doCancellingSubscription:" destination="7KT-Et-afk" eventType="touchUpInside" id="Jyh-Qe-LcQ"/>
+                                                    </connections>
+                                                </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="IEP-P9-J3l">
+                                                    <rect key="frame" x="334" y="12" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="RRY-Fk-nHF" firstAttribute="centerX" secondItem="NkR-i8-2dT" secondAttribute="centerX" id="HsA-Mf-KAv"/>
+                                                <constraint firstItem="IEP-P9-J3l" firstAttribute="centerY" secondItem="NkR-i8-2dT" secondAttribute="centerY" id="VYk-Kc-lOE"/>
+                                                <constraint firstItem="IEP-P9-J3l" firstAttribute="trailing" secondItem="NkR-i8-2dT" secondAttribute="trailingMargin" id="qmk-L9-RCP"/>
+                                                <constraint firstItem="RRY-Fk-nHF" firstAttribute="centerY" secondItem="NkR-i8-2dT" secondAttribute="centerY" id="vbK-Uf-P1b"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Events" id="TOF-K7-HM9">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="1HU-dF-gN4">
+                                        <rect key="frame" x="20" y="242" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1HU-dF-gN4" id="Hji-I7-fzb">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CbI-uX-qC4">
+                                                    <rect key="frame" x="115" y="7" width="144" height="30"/>
+                                                    <state key="normal" title="Tap me 3 more times"/>
+                                                    <connections>
+                                                        <action selector="doEvent:" destination="7KT-Et-afk" eventType="touchUpInside" id="WOT-mf-KJh"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="CbI-uX-qC4" firstAttribute="centerX" secondItem="Hji-I7-fzb" secondAttribute="centerX" id="N0A-Zw-P0C"/>
+                                                <constraint firstItem="CbI-uX-qC4" firstAttribute="centerY" secondItem="Hji-I7-fzb" secondAttribute="centerY" id="rmF-Er-T0n"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Info" footerTitle="Profile this app via the Timelane Instrument to see subscriptions and events visualized in the Instruments application." id="Awo-3n-p96" userLabel="Info">
+                                <cells/>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="7KT-Et-afk" id="nZi-rc-yWb"/>
+                            <outlet property="delegate" destination="7KT-Et-afk" id="u3L-FO-55E"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="cancellingSpinner" destination="IEP-P9-J3l" id="O1a-zm-l22"/>
+                        <outlet property="completingSpinner" destination="y7L-by-Wfe" id="dHG-Ab-jYF"/>
+                        <outlet property="countdownButton" destination="CbI-uX-qC4" id="1No-cP-tbe"/>
+                        <outlet property="failingSpinner" destination="mRm-eA-3Yn" id="n2K-lm-JS4"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V82-cU-nYC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="113.04347826086958" y="103.79464285714285"/>
+        </scene>
+    </scenes>
+</document>

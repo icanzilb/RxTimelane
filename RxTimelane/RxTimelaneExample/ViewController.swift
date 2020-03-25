@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import TimelaneCore
 import RxSwift
 import RxTimelane
 
@@ -27,13 +28,13 @@ class ViewController: UITableViewController {
             }, onError: { [weak self] error in
                 NSLog("\(error)")
                 self?.failingSpinner.isHidden = true
-            }, onCompleted: { [weak self] in
-                NSLog("completed")
-                self?.failingSpinner.isHidden = true
+                }, onCompleted: { [weak self] in
+                    NSLog("completed")
+                    self?.failingSpinner.isHidden = true
             })
             .disposed(by: bag)
     }
-
+    
     @IBOutlet var completingSpinner: UIActivityIndicatorView!
     @IBAction func doCompletingSubscription(_ sender: Any) {
         completingSpinner.isHidden = false
@@ -45,9 +46,9 @@ class ViewController: UITableViewController {
             }, onError: { [weak self] error in
                 NSLog("\(error)")
                 self?.completingSpinner.isHidden = true
-            }, onCompleted: { [weak self] in
-                NSLog("completed")
-                self?.completingSpinner.isHidden = true
+                }, onCompleted: { [weak self] in
+                    NSLog("completed")
+                    self?.completingSpinner.isHidden = true
             })
             .disposed(by: bag)
     }
@@ -63,11 +64,11 @@ class ViewController: UITableViewController {
             }, onError: { [weak self] error in
                 NSLog("\(error)")
                 self?.cancellingSpinner.isHidden = true
-            }, onCompleted: { [weak self] in
-                NSLog("completed")
-                self?.cancellingSpinner.isHidden = true
+                }, onCompleted: { [weak self] in
+                    NSLog("completed")
+                    self?.cancellingSpinner.isHidden = true
             })
-
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             willCancel?.dispose()
             willCancel = nil
@@ -86,12 +87,12 @@ class ViewController: UITableViewController {
             .lane("Countdown", filter: [.event]) {
                 "Count: \($0)"
             }
-            .map { "Tap me \($0) more times" }
-            .subscribe(onNext: {
-                [weak self] in self?.countdownButton.setTitle($0, for: .normal)
+        .map { "Tap me \($0) more times" }
+        .subscribe(onNext: {
+            [weak self] in self?.countdownButton.setTitle($0, for: .normal)
             }, onCompleted: {
                 [weak self] in self?.countdownButton.setTitle("Finished", for: .normal)
-            })
+        })
     }
     
     @IBAction func doEvent(_ sender: Any) {

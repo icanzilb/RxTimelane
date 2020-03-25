@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "9999"
+   LastUpgradeVersion = "1130"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "RxTimelane::RxTimelane"
+               BlueprintIdentifier = "BCEA4D682429714A00B8E52C"
                BuildableName = "RxTimelane.framework"
                BlueprintName = "RxTimelane"
                ReferencedContainer = "container:RxTimelane.xcodeproj">
@@ -28,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "RxTimelane::RxTimelaneTests"
-               BuildableName = "RxTimelaneTests.xctest"
-               BlueprintName = "RxTimelaneTests"
-               ReferencedContainer = "container:RxTimelane.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -57,6 +47,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "BCEA4D682429714A00B8E52C"
+            BuildableName = "RxTimelane.framework"
+            BlueprintName = "RxTimelane"
+            ReferencedContainer = "container:RxTimelane.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
