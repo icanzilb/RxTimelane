@@ -24,12 +24,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         
-      - name: Check Carthage build
-        run: |
-          cd RxTimelane
-          carthage bootstrap
-          carthage build --no-skip-current
-
       - name: Cache Carthage
         id: cache-carthage
         uses: actions/cache@v1.1.0
@@ -40,5 +34,8 @@ jobs:
 
       - name: Update Carthage
         if: steps.cache-carthage.outputs.cache-hit != 'true'
-        run: carthage update
+        run: |
+          cd RxTimelane
+          carthage bootstrap
+          carthage build --no-skip-current
 
