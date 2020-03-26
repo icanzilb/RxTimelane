@@ -27,12 +27,11 @@ public extension ObservableType {
               filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
-              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
-              logger: @escaping Timelane.Logger) -> Observable<Element> {
+              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) }) -> Observable<Element> {
       
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
-        let subscription = Timelane.Subscription(name: name, logger: logger)
+        let subscription = Timelane.Subscription(name: name)
         
         var terminated = false
         
@@ -80,6 +79,72 @@ public extension ObservableType {
             guard !terminated else { return }
             terminated = true
     
+            if filter.contains(.subscription) {
+                subscription.end(state: .cancelled)
+            }
+            
+            if filter.contains(.event) {
+                subscription.event(value: .cancelled, source: source)
+            }
+        })
+    }
+}
+
+public extension PrimitiveSequence where Trait == SingleTrait {
+    
+    @available(macOS 10.14, iOS 12, tvOS 12, watchOS 5, *)
+    func lane(_ name: String,
+              filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
+              file: StaticString = #file,
+              function: StaticString = #function, line: UInt = #line,
+              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) }) -> Single<Element> {
+      
+        let fileName = file.description.components(separatedBy: "/").last!
+        let source = "\(fileName):\(line) - \(function)"
+        let subscription = Timelane.Subscription(name: name)
+        
+        var terminated = false
+        
+        return self.do(onSuccess: { element in
+            lock.lock()
+            defer { lock.unlock() }
+            guard !terminated else { return }
+            terminated = true
+            
+            if filter.contains(.event) {
+              subscription.event(value: .value(transform(element)), source: source)
+            }
+            
+            if filter.contains(.subscription) {
+                subscription.end(state: .completed)
+            }
+            
+            if filter.contains(.event) {
+                subscription.event(value: .completion, source: source)
+            }
+        }, onError: { error in
+            lock.lock()
+            defer { lock.unlock() }
+
+            terminated = true
+            
+            if filter.contains(.subscription) {
+                subscription.end(state: .error(error.localizedDescription))
+            }
+            
+            if filter.contains(.event) {
+                subscription.event(value: .error(error.localizedDescription), source: source)
+            }
+        }, onSubscribe: {
+            if filter.contains(.subscription) {
+              subscription.begin(source: source)
+            }
+        }, onDispose: {
+            lock.lock()
+            defer { lock.unlock() }
+            guard !terminated else { return }
+            terminated = true
+            
             if filter.contains(.subscription) {
                 subscription.end(state: .cancelled)
             }
