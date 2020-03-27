@@ -27,11 +27,12 @@ public extension ObservableType {
               filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
-              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) }) -> Observable<Element> {
+              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
+              logger: @escaping Timelane.Logger) -> Observable<Element> {
       
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
-        let subscription = Timelane.Subscription(name: name)
+        let subscription = Timelane.Subscription(name: name, logger: logger)
         
         var terminated = false
         
@@ -97,11 +98,12 @@ public extension PrimitiveSequence where Trait == SingleTrait {
               filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
-              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) }) -> Single<Element> {
+              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
+              logger: @escaping Timelane.Logger) -> Single<Element> {
       
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
-        let subscription = Timelane.Subscription(name: name)
+        let subscription = Timelane.Subscription(name: name, logger: logger)
         
         var terminated = false
         
@@ -159,40 +161,23 @@ public extension PrimitiveSequence where Trait == SingleTrait {
     }
 }
 
-public extension PrimitiveSequence where Trait == CompletableTrait {
+public extension PrimitiveSequence where Trait == CompletableTrait, Element == Never {
     
     @available(macOS 10.14, iOS 12, tvOS 12, watchOS 5, *)
     func lane(_ name: String,
               filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
-              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) }) -> Completable {
+              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
+              logger: @escaping Timelane.Logger) -> Completable {
       
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
-        let subscription = Timelane.Subscription(name: name)
+        let subscription = Timelane.Subscription(name: name, logger: logger)
         
         var terminated = false
         
-        return self.do(onCompleted: {
-            lock.lock()
-            defer { lock.unlock() }
-            guard !terminated else { return }
-            terminated = true
-            
-            if filter.contains(.event) {
-                subscription.event(value: .value(transform(element)), source: source)
-            }
-            
-            if filter.contains(.subscription) {
-                subscription.end(state: .completed)
-            }
-            
-            if filter.contains(.event) {
-                subscription.event(value: .completion, source: source)
-            }
-        },
-        onError: { error in
+        return self.do(onError: { error in
             lock.lock()
             defer { lock.unlock() }
             
@@ -204,6 +189,20 @@ public extension PrimitiveSequence where Trait == CompletableTrait {
             
             if filter.contains(.event) {
                 subscription.event(value: .error(error.localizedDescription), source: source)
+            }
+        },
+       onCompleted: {
+            lock.lock()
+            defer { lock.unlock() }
+            guard !terminated else { return }
+            terminated = true
+            
+            if filter.contains(.subscription) {
+                subscription.end(state: .completed)
+            }
+            
+            if filter.contains(.event) {
+                subscription.event(value: .completion, source: source)
             }
         },
         onSubscribe: {
@@ -235,11 +234,12 @@ public extension PrimitiveSequence where Trait == MaybeTrait {
               filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
-              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) }) -> Completable {
+              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
+              logger: @escaping Timelane.Logger) -> Maybe<Element> {
       
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
-        let subscription = Timelane.Subscription(name: name)
+        let subscription = Timelane.Subscription(name: name, logger: logger)
         
         var terminated = false
 
