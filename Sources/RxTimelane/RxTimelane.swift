@@ -112,7 +112,7 @@ public extension PrimitiveSequence where Trait == SingleTrait {
             terminated = true
             
             if filter.contains(.event) {
-              subscription.event(value: .value(transform(element)), source: source)
+                subscription.event(value: .value(transform(element)), source: source)
             }
             
             if filter.contains(.subscription) {
@@ -122,10 +122,11 @@ public extension PrimitiveSequence where Trait == SingleTrait {
             if filter.contains(.event) {
                 subscription.event(value: .completion, source: source)
             }
-        }, onError: { error in
+        },
+        onError: { error in
             lock.lock()
             defer { lock.unlock() }
-
+            
             terminated = true
             
             if filter.contains(.subscription) {
@@ -135,11 +136,152 @@ public extension PrimitiveSequence where Trait == SingleTrait {
             if filter.contains(.event) {
                 subscription.event(value: .error(error.localizedDescription), source: source)
             }
-        }, onSubscribe: {
+        },
+        onSubscribe: {
             if filter.contains(.subscription) {
-              subscription.begin(source: source)
+                subscription.begin(source: source)
             }
-        }, onDispose: {
+        },
+        onDispose: {
+            lock.lock()
+            defer { lock.unlock() }
+            guard !terminated else { return }
+            terminated = true
+            
+            if filter.contains(.subscription) {
+                subscription.end(state: .cancelled)
+            }
+            
+            if filter.contains(.event) {
+                subscription.event(value: .cancelled, source: source)
+            }
+        })
+    }
+}
+
+public extension PrimitiveSequence where Trait == CompletableTrait {
+    
+    @available(macOS 10.14, iOS 12, tvOS 12, watchOS 5, *)
+    func lane(_ name: String,
+              filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
+              file: StaticString = #file,
+              function: StaticString = #function, line: UInt = #line,
+              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) }) -> Completable {
+      
+        let fileName = file.description.components(separatedBy: "/").last!
+        let source = "\(fileName):\(line) - \(function)"
+        let subscription = Timelane.Subscription(name: name)
+        
+        var terminated = false
+        
+        return self.do(onCompleted: {
+            lock.lock()
+            defer { lock.unlock() }
+            guard !terminated else { return }
+            terminated = true
+            
+            if filter.contains(.event) {
+                subscription.event(value: .value(transform(element)), source: source)
+            }
+            
+            if filter.contains(.subscription) {
+                subscription.end(state: .completed)
+            }
+            
+            if filter.contains(.event) {
+                subscription.event(value: .completion, source: source)
+            }
+        },
+        onError: { error in
+            lock.lock()
+            defer { lock.unlock() }
+            
+            terminated = true
+            
+            if filter.contains(.subscription) {
+                subscription.end(state: .error(error.localizedDescription))
+            }
+            
+            if filter.contains(.event) {
+                subscription.event(value: .error(error.localizedDescription), source: source)
+            }
+        },
+        onSubscribe: {
+            if filter.contains(.subscription) {
+                subscription.begin(source: source)
+            }
+        },
+        onDispose: {
+            lock.lock()
+            defer { lock.unlock() }
+            guard !terminated else { return }
+            terminated = true
+            
+            if filter.contains(.subscription) {
+                subscription.end(state: .cancelled)
+            }
+            
+            if filter.contains(.event) {
+                subscription.event(value: .cancelled, source: source)
+            }
+        })
+    }
+}
+
+public extension PrimitiveSequence where Trait == MaybeTrait {
+    
+    @available(macOS 10.14, iOS 12, tvOS 12, watchOS 5, *)
+    func lane(_ name: String,
+              filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
+              file: StaticString = #file,
+              function: StaticString = #function, line: UInt = #line,
+              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) }) -> Completable {
+      
+        let fileName = file.description.components(separatedBy: "/").last!
+        let source = "\(fileName):\(line) - \(function)"
+        let subscription = Timelane.Subscription(name: name)
+        
+        var terminated = false
+
+        return self.do(onNext: { element in
+            if filter.contains(.event) {
+                subscription.event(value: .value(transform(element)), source: source)
+            }
+        },
+        onError: { error in
+            lock.lock()
+            defer { lock.unlock() }
+            
+            terminated = true
+            
+            if filter.contains(.subscription) {
+                subscription.end(state: .error(error.localizedDescription))
+            }
+            
+            if filter.contains(.event) {
+                subscription.event(value: .error(error.localizedDescription), source: source)
+            }
+        },
+        onCompleted: {
+            lock.lock()
+            defer { lock.unlock() }
+            guard !terminated else { return }
+            terminated = true
+            
+            if filter.contains(.subscription) {
+                subscription.end(state: .completed)
+            }
+            
+            if filter.contains(.event) {
+                subscription.event(value: .completion, source: source)
+            }
+        },
+        onSubscribe: {
+            if filter.contains(.subscription) {
+                subscription.begin(source: source)
+            }
+        },
+        onDispose: {
             lock.lock()
             defer { lock.unlock() }
             guard !terminated else { return }
