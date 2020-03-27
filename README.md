@@ -92,7 +92,7 @@ pod 'RxTimelane', '~> 1.0'
 
 ## Carthage
 
- [Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate **TimelaneCombine** into your Xcode project using Carthage, add it in your `Cartfile`:
+ [Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate **RxTimelane** into your Xcode project using Carthage, add it in your `Cartfile`:
 
  ```ogdl
  github "icanzilb/RxTimelane" "1.0"
