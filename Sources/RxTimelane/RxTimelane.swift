@@ -28,7 +28,7 @@ public extension ObservableType {
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
               transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
-              logger: @escaping Timelane.Logger) -> Observable<Element> {
+              logger: @escaping Timelane.Logger = Timelane.defaultLogger) -> Observable<Element> {
       
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"

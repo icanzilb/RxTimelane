@@ -62,9 +62,9 @@ Use `lane("Lane name")` to send data to both the subscriptions and events lanes 
 Additionally you can transform the values logged in Timelane by using the optional `transformValue` trailing closure:
 
 ```swift
-lane("Lane name") { value in
+lane("Lane name", transformValue: { value in
   return "Value: \(value)"
-}
+})
 ```
 
 # Installation
