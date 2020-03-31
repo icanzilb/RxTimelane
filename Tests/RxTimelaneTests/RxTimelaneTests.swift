@@ -4,7 +4,7 @@ import TimelaneCoreTestUtils
 import RxSwift
 @testable import RxTimelane
 
-final class TimelaneCombineTests: XCTestCase {
+final class RxTimelaneTests: XCTestCase {
     /// Test the events emitted by a sync array publisher
     func testEmitsEventsFromCompletingPublisher() {
         let recorder = TestLog()
