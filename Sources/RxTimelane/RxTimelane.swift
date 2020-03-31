@@ -99,7 +99,7 @@ public extension PrimitiveSequence where Trait == SingleTrait {
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
               transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
-              logger: @escaping Timelane.Logger) -> Single<Element> {
+              logger: @escaping Timelane.Logger = Timelane.defaultLogger) -> Single<Element> {
       
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
@@ -169,7 +169,7 @@ public extension PrimitiveSequence where Trait == CompletableTrait, Element == N
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
               transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
-              logger: @escaping Timelane.Logger) -> Completable {
+              logger: @escaping Timelane.Logger = Timelane.defaultLogger) -> Completable {
       
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
@@ -235,7 +235,7 @@ public extension PrimitiveSequence where Trait == MaybeTrait {
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
               transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
-              logger: @escaping Timelane.Logger) -> Maybe<Element> {
+              logger: @escaping Timelane.Logger = Timelane.defaultLogger) -> Maybe<Element> {
       
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
