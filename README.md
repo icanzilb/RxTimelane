@@ -22,6 +22,8 @@
 
 # Usage
 
+> Before making use of RxTimelane, you need to install the Timelane Instrument from http://timelane.tools
+
 Import the RxTimelane framework in your code:
 
 ```swift
