@@ -8,7 +8,6 @@
 
 <p align="center">
     <img src="https://img.shields.io/badge/Swift-5.2-orange.svg" />
-    <img src="https://img.shields.io/cocoapods/v/RxTimelane.svg" />
     <img src="https://img.shields.io/cocoapods/l/RxTimelane.svg" />
     <img src="https://img.shields.io/cocoapods/p/RxTimelane.svg" />
 </p>
@@ -84,7 +83,7 @@ II . Manually in your **Package.swift** file add:
 
 ## CocoaPods
 
-[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate **TimelaneCombine** into your Xcode project using CocoaPods, add it to your `Podfile`:
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate **RxTimelane** into your Xcode project using CocoaPods, add it to your `Podfile`:
 
 ```ruby
 pod 'RxTimelane', '~> 1.0'
@@ -92,15 +91,11 @@ pod 'RxTimelane', '~> 1.0'
 
 ## Carthage
 
- [Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate **RxTimelane** into your Xcode project using Carthage, add it in your `Cartfile`:
-
- ```ogdl
- github "icanzilb/RxTimelane" "1.0"
- ```
+Not supported. [More info](https://github.com/icanzilb/RxTimelane/issues/11)
 
 # Demo
 
-This repo contains a simple demo app. To give it a try open **RxTimelane/RxTimelane.xcodeproj** and run the "RxTimelaneDemo" scheme.
+This repo contains a simple demo app. To give it a try open **RxTimelaneExample/RxTimelane.xcodeproj** and run the "RxTimelaneExample" scheme.
 
 ![Timelane demo app](etc/demo.png)
 
