@@ -21,8 +21,6 @@
 		BC94D930242972B40068D353 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D92E242972B40068D353 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BC94D933242972B70068D353 /* TimelaneCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D932242972B70068D353 /* TimelaneCore.framework */; platformFilter = ios; };
 		BC94D934242972B70068D353 /* TimelaneCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC94D932242972B70068D353 /* TimelaneCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BCEA4D6E2429714A00B8E52C /* RxTimelane.h in Headers */ = {isa = PBXBuildFile; fileRef = BCEA4D6C2429714A00B8E52C /* RxTimelane.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BCEA4D752429719E00B8E52C /* RxTimelane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEA4D742429719E00B8E52C /* RxTimelane.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,9 +51,6 @@
 		BC94D92E242972B40068D353 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		BC94D932242972B70068D353 /* TimelaneCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TimelaneCore.framework; path = Carthage/Build/iOS/TimelaneCore.framework; sourceTree = "<group>"; };
 		BCEA4D692429714A00B8E52C /* RxTimelane.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxTimelane.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BCEA4D6C2429714A00B8E52C /* RxTimelane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxTimelane.h; sourceTree = "<group>"; };
-		BCEA4D6D2429714A00B8E52C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BCEA4D742429719E00B8E52C /* RxTimelane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RxTimelane.swift; path = ../../Sources/RxTimelane/RxTimelane.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +103,6 @@
 		BCEA4D5F2429714A00B8E52C = {
 			isa = PBXGroup;
 			children = (
-				BCEA4D6B2429714A00B8E52C /* RxTimelane */,
 				BC38571D242A36E2006BC2D8 /* RxTimelaneExample */,
 				BCEA4D6A2429714A00B8E52C /* Products */,
 				BC94D92D242972B40068D353 /* Frameworks */,
@@ -124,16 +118,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BCEA4D6B2429714A00B8E52C /* RxTimelane */ = {
-			isa = PBXGroup;
-			children = (
-				BCEA4D742429719E00B8E52C /* RxTimelane.swift */,
-				BCEA4D6C2429714A00B8E52C /* RxTimelane.h */,
-				BCEA4D6D2429714A00B8E52C /* Info.plist */,
-			);
-			path = RxTimelane;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -141,7 +125,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCEA4D6E2429714A00B8E52C /* RxTimelane.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +251,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCEA4D752429719E00B8E52C /* RxTimelane.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
