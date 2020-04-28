@@ -80,7 +80,7 @@ I . Automatically in Xcode:
 II . Manually in your **Package.swift** file add:
 
 ```swift
-.package(url: "https://github.com/icanzilb/RxTimelane", .from("1.0.0"))
+.package(url: "https://github.com/icanzilb/RxTimelane", from: "1.0.0")
 ```
 
 ## CocoaPods
