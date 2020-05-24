@@ -39,6 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9CB0E88A247B275900D9FFCE /* RxTimelane */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RxTimelane; path = ..; sourceTree = "<group>"; };
 		BC38571C242A36E2006BC2D8 /* RxTimelaneExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxTimelaneExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC38571E242A36E2006BC2D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC385720242A36E2006BC2D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +104,7 @@
 		BCEA4D5F2429714A00B8E52C = {
 			isa = PBXGroup;
 			children = (
+				9CB0E88A247B275900D9FFCE /* RxTimelane */,
 				BC38571D242A36E2006BC2D8 /* RxTimelaneExample */,
 				BCEA4D6A2429714A00B8E52C /* Products */,
 				BC94D92D242972B40068D353 /* Frameworks */,

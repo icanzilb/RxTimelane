@@ -177,6 +177,56 @@ final class RxTimelaneTests: XCTestCase {
         XCTAssertEqual(recorder.logged[1].outputTldr, "Output, Test Subscription, TEST")
     }
     
+    /// Test multiple async subscriptions
+    func testMultipleSubscriptions() {
+        let recorder = TestLog()
+        let subscriptions = DisposeBag()
+        
+        let initialSubscriptionCount = Timelane.Subscription.subscriptionCounter
+        Timelane.Subscription.didEmitVersion = true
+
+        let testObservable = Observable<String>.testObservable(duration: 1.0)
+            .lane("Test Subscription", filter: .event, transformValue: { _ in return "TEST" }, logger: recorder.log)
+
+        testObservable
+            .subscribe { _ in }
+            .disposed(by: subscriptions)
+        
+        testObservable
+            .subscribe { _ in }
+            .disposed(by: subscriptions)
+        
+        DispatchQueue.global().async {
+            testObservable
+                .subscribe { _ in }
+                .disposed(by: subscriptions)
+        }
+        
+        // Wait a beat before checking the recorder
+        let fauxExpectation = expectation(description: "Just waiting a beat")
+        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 2) {
+            fauxExpectation.fulfill()
+        }
+        wait(for: [fauxExpectation], timeout: 3)
+
+        XCTAssertEqual(recorder.logged.count, 6)
+        guard recorder.logged.count == 6 else {
+            return
+        }
+
+        XCTAssertEqual(recorder.logged[0].outputTldr, "Output, Test Subscription, TEST")
+        XCTAssertEqual(recorder.logged[1].outputTldr, "Output, Test Subscription, TEST")
+        XCTAssertEqual(recorder.logged[2].outputTldr, "Output, Test Subscription, TEST")
+
+        XCTAssertEqual(recorder.logged[3].outputTldr, "Completed, Test Subscription, ")
+        XCTAssertEqual(recorder.logged[3].id, "\(initialSubscriptionCount+1)")
+        XCTAssertEqual(recorder.logged[4].outputTldr, "Completed, Test Subscription, ")
+        XCTAssertEqual(recorder.logged[4].id, "\(initialSubscriptionCount+2)")
+        XCTAssertEqual(recorder.logged[5].outputTldr, "Completed, Test Subscription, ")
+        XCTAssertEqual(recorder.logged[5].id, "\(initialSubscriptionCount+3)")
+    }
+
+    
     static var allTests = [
         ("testEmitsEventsFromCompletingPublisher", testEmitsEventsFromCompletingPublisher),
         ("testEmitsEventsFromNonCompletingPublisher", testEmitsEventsFromNonCompletingPublisher),
@@ -184,5 +234,6 @@ final class RxTimelaneTests: XCTestCase {
         ("testEmitsEventsFromFailedPublisher", testEmitsEventsFromFailedPublisher),
         ("testEmitsSubscription", testEmitsSubscription),
         ("testFormatting", testFormatting),
+        ("testMultipleSubscriptions", testMultipleSubscriptions),
     ]
 }

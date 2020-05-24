@@ -24,70 +24,75 @@ public extension ObservableType {
     
     @available(macOS 10.14, iOS 12, tvOS 12, watchOS 5, *)
     func lane(_ name: String,
-              filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
+              filter: Timelane.LaneTypeOptions = .all,
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
               transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
               logger: @escaping Timelane.Logger = Timelane.defaultLogger) -> Observable<Element> {
-      
+        
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
-        let subscription = Timelane.Subscription(name: name, logger: logger)
         
-        var terminated = false
-        
-        return self.do(onNext: { element in
-            if filter.contains(.event) {
-              subscription.event(value: .value(transform(element)), source: source)
-            }
-        },
-        onError: { error in
-            lock.lock()
-            defer { lock.unlock() }
-
-            terminated = true
+        return Observable<Element>.create { observer in
+            let subscription = Timelane.Subscription(name: name, logger: logger)
+            var terminated = false
             
-            if filter.contains(.subscription) {
-                subscription.end(state: .error(error.localizedDescription))
-            }
+            let disposable = self.do(onNext: { element in
+                if filter.contains(.event) {
+                    subscription.event(value: .value(transform(element)), source: source)
+                }
+            },
+            onError: { error in
+                lock.lock()
+                defer { lock.unlock() }
+                
+                terminated = true
+                
+                if filter.contains(.subscription) {
+                    subscription.end(state: .error(error.localizedDescription))
+                }
+                
+                if filter.contains(.event) {
+                    subscription.event(value: .error(error.localizedDescription), source: source)
+                }
+            },
+            onCompleted: {
+                lock.lock()
+                defer { lock.unlock() }
+                guard !terminated else { return }
+                terminated = true
+                
+                if filter.contains(.subscription) {
+                    subscription.end(state: .completed)
+                }
+                
+                if filter.contains(.event) {
+                    subscription.event(value: .completion, source: source)
+                }
+            },
+            onSubscribe: {
+                if filter.contains(.subscription) {
+                    subscription.begin(source: source)
+                }
+            },
+            onDispose: {
+                lock.lock()
+                defer { lock.unlock() }
+                guard !terminated else { return }
+                terminated = true
+                
+                if filter.contains(.subscription) {
+                    subscription.end(state: .cancelled)
+                }
+                
+                if filter.contains(.event) {
+                    subscription.event(value: .cancelled, source: source)
+                }
+            })
+            .subscribe()
             
-            if filter.contains(.event) {
-                subscription.event(value: .error(error.localizedDescription), source: source)
-            }
-        },
-        onCompleted: {
-            lock.lock()
-            defer { lock.unlock() }
-            guard !terminated else { return }
-            terminated = true
-            
-            if filter.contains(.subscription) {
-                subscription.end(state: .completed)
-            }
-            
-            if filter.contains(.event) {
-                subscription.event(value: .completion, source: source)
-            }
-        },
-        onSubscribe: {
-            if filter.contains(.subscription) {
-              subscription.begin(source: source)
-            }
-        },
-        onDispose: {
-            lock.lock()
-            defer { lock.unlock() }
-            guard !terminated else { return }
-            terminated = true
-    
-            if filter.contains(.subscription) {
-                subscription.end(state: .cancelled)
-            }
-            
-            if filter.contains(.event) {
-                subscription.event(value: .cancelled, source: source)
-            }
-        })
+            return Disposables.create([disposable])
+        }
     }
 }
 
@@ -100,64 +105,70 @@ public extension PrimitiveSequence where Trait == SingleTrait {
               function: StaticString = #function, line: UInt = #line,
               transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
               logger: @escaping Timelane.Logger = Timelane.defaultLogger) -> Single<Element> {
-      
+        
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
-        let subscription = Timelane.Subscription(name: name, logger: logger)
         
-        var terminated = false
-        
-        return self.do(onSuccess: { element in
-            lock.lock()
-            defer { lock.unlock() }
-            guard !terminated else { return }
-            terminated = true
+        return Observable<Element>.create { observer in
+            let subscription = Timelane.Subscription(name: name, logger: logger)
+            var terminated = false
             
-            if filter.contains(.event) {
-                subscription.event(value: .value(transform(element)), source: source)
-            }
+            let disposable = self.do(onSuccess: { element in
+                lock.lock()
+                defer { lock.unlock() }
+                guard !terminated else { return }
+                terminated = true
+                
+                if filter.contains(.event) {
+                    subscription.event(value: .value(transform(element)), source: source)
+                }
+                
+                if filter.contains(.subscription) {
+                    subscription.end(state: .completed)
+                }
+                
+                if filter.contains(.event) {
+                    subscription.event(value: .completion, source: source)
+                }
+            },
+            onError: { error in
+                lock.lock()
+                defer { lock.unlock() }
+                
+                terminated = true
+                
+                if filter.contains(.subscription) {
+                    subscription.end(state: .error(error.localizedDescription))
+                }
+                
+                if filter.contains(.event) {
+                    subscription.event(value: .error(error.localizedDescription), source: source)
+                }
+            },
+            onSubscribe: {
+                if filter.contains(.subscription) {
+                    subscription.begin(source: source)
+                }
+            },
+            onDispose: {
+                lock.lock()
+                defer { lock.unlock() }
+                guard !terminated else { return }
+                terminated = true
+                
+                if filter.contains(.subscription) {
+                    subscription.end(state: .cancelled)
+                }
+                
+                if filter.contains(.event) {
+                    subscription.event(value: .cancelled, source: source)
+                }
+            })
+            .subscribe()
             
-            if filter.contains(.subscription) {
-                subscription.end(state: .completed)
-            }
-            
-            if filter.contains(.event) {
-                subscription.event(value: .completion, source: source)
-            }
-        },
-        onError: { error in
-            lock.lock()
-            defer { lock.unlock() }
-            
-            terminated = true
-            
-            if filter.contains(.subscription) {
-                subscription.end(state: .error(error.localizedDescription))
-            }
-            
-            if filter.contains(.event) {
-                subscription.event(value: .error(error.localizedDescription), source: source)
-            }
-        },
-        onSubscribe: {
-            if filter.contains(.subscription) {
-                subscription.begin(source: source)
-            }
-        },
-        onDispose: {
-            lock.lock()
-            defer { lock.unlock() }
-            guard !terminated else { return }
-            terminated = true
-            
-            if filter.contains(.subscription) {
-                subscription.end(state: .cancelled)
-            }
-            
-            if filter.contains(.event) {
-                subscription.event(value: .cancelled, source: source)
-            }
-        })
+            return Disposables.create([disposable])
+        }
+        .asSingle()
     }
 }
 
@@ -170,60 +181,66 @@ public extension PrimitiveSequence where Trait == CompletableTrait, Element == N
               function: StaticString = #function, line: UInt = #line,
               transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
               logger: @escaping Timelane.Logger = Timelane.defaultLogger) -> Completable {
-      
+        
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
-        let subscription = Timelane.Subscription(name: name, logger: logger)
         
-        var terminated = false
-        
-        return self.do(onError: { error in
-            lock.lock()
-            defer { lock.unlock() }
+        return Observable<Element>.create { observer in
+            let subscription = Timelane.Subscription(name: name, logger: logger)
+            var terminated = false
             
-            terminated = true
+            let disposable = self.do(onError: { error in
+                lock.lock()
+                defer { lock.unlock() }
+                
+                terminated = true
+                
+                if filter.contains(.subscription) {
+                    subscription.end(state: .error(error.localizedDescription))
+                }
+                
+                if filter.contains(.event) {
+                    subscription.event(value: .error(error.localizedDescription), source: source)
+                }
+            },
+            onCompleted: {
+                lock.lock()
+                defer { lock.unlock() }
+                guard !terminated else { return }
+                terminated = true
+                
+                if filter.contains(.subscription) {
+                    subscription.end(state: .completed)
+                }
+                
+                if filter.contains(.event) {
+                    subscription.event(value: .completion, source: source)
+                }
+            },
+            onSubscribe: {
+                if filter.contains(.subscription) {
+                    subscription.begin(source: source)
+                }
+            },
+            onDispose: {
+                lock.lock()
+                defer { lock.unlock() }
+                guard !terminated else { return }
+                terminated = true
+                
+                if filter.contains(.subscription) {
+                    subscription.end(state: .cancelled)
+                }
+                
+                if filter.contains(.event) {
+                    subscription.event(value: .cancelled, source: source)
+                }
+            })
+            .subscribe()
             
-            if filter.contains(.subscription) {
-                subscription.end(state: .error(error.localizedDescription))
-            }
-            
-            if filter.contains(.event) {
-                subscription.event(value: .error(error.localizedDescription), source: source)
-            }
-        },
-       onCompleted: {
-            lock.lock()
-            defer { lock.unlock() }
-            guard !terminated else { return }
-            terminated = true
-            
-            if filter.contains(.subscription) {
-                subscription.end(state: .completed)
-            }
-            
-            if filter.contains(.event) {
-                subscription.event(value: .completion, source: source)
-            }
-        },
-        onSubscribe: {
-            if filter.contains(.subscription) {
-                subscription.begin(source: source)
-            }
-        },
-        onDispose: {
-            lock.lock()
-            defer { lock.unlock() }
-            guard !terminated else { return }
-            terminated = true
-            
-            if filter.contains(.subscription) {
-                subscription.end(state: .cancelled)
-            }
-            
-            if filter.contains(.event) {
-                subscription.event(value: .cancelled, source: source)
-            }
-        })
+            return Disposables.create([disposable])
+        }
+        .asCompletable()
     }
 }
 
@@ -239,61 +256,67 @@ public extension PrimitiveSequence where Trait == MaybeTrait {
       
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
-        let subscription = Timelane.Subscription(name: name, logger: logger)
         
-        var terminated = false
-
-        return self.do(onNext: { element in
-            if filter.contains(.event) {
-                subscription.event(value: .value(transform(element)), source: source)
-            }
-        },
-        onError: { error in
-            lock.lock()
-            defer { lock.unlock() }
+        return Observable<Element>.create { observer in
+            let subscription = Timelane.Subscription(name: name, logger: logger)
+            var terminated = false
             
-            terminated = true
-            
-            if filter.contains(.subscription) {
-                subscription.end(state: .error(error.localizedDescription))
-            }
-            
-            if filter.contains(.event) {
-                subscription.event(value: .error(error.localizedDescription), source: source)
-            }
-        },
-        onCompleted: {
-            lock.lock()
-            defer { lock.unlock() }
-            guard !terminated else { return }
-            terminated = true
-            
-            if filter.contains(.subscription) {
-                subscription.end(state: .completed)
-            }
-            
-            if filter.contains(.event) {
-                subscription.event(value: .completion, source: source)
-            }
-        },
-        onSubscribe: {
-            if filter.contains(.subscription) {
-                subscription.begin(source: source)
-            }
-        },
-        onDispose: {
-            lock.lock()
-            defer { lock.unlock() }
-            guard !terminated else { return }
-            terminated = true
-            
-            if filter.contains(.subscription) {
-                subscription.end(state: .cancelled)
-            }
-            
-            if filter.contains(.event) {
-                subscription.event(value: .cancelled, source: source)
-            }
-        })
+            let disposable = self.do(onNext: { element in
+                if filter.contains(.event) {
+                    subscription.event(value: .value(transform(element)), source: source)
+                }
+            },
+            onError: { error in
+                lock.lock()
+                defer { lock.unlock() }
+                
+                terminated = true
+                
+                if filter.contains(.subscription) {
+                    subscription.end(state: .error(error.localizedDescription))
+                }
+                
+                if filter.contains(.event) {
+                    subscription.event(value: .error(error.localizedDescription), source: source)
+                }
+            },
+            onCompleted: {
+                lock.lock()
+                defer { lock.unlock() }
+                guard !terminated else { return }
+                terminated = true
+                
+                if filter.contains(.subscription) {
+                    subscription.end(state: .completed)
+                }
+                
+                if filter.contains(.event) {
+                    subscription.event(value: .completion, source: source)
+                }
+            },
+            onSubscribe: {
+                if filter.contains(.subscription) {
+                    subscription.begin(source: source)
+                }
+            },
+            onDispose: {
+                lock.lock()
+                defer { lock.unlock() }
+                guard !terminated else { return }
+                terminated = true
+                
+                if filter.contains(.subscription) {
+                    subscription.end(state: .cancelled)
+                }
+                
+                if filter.contains(.event) {
+                    subscription.event(value: .cancelled, source: source)
+                }
+            })
+            .subscribe()
+                
+            return Disposables.create([disposable])
+        }
+        .asMaybe()
     }
 }

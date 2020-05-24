@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'RxTimelane'
-  s.version          = '1.0.6'
+  s.version          = '1.0.8'
   s.summary          = 'The RxSwift Timelane package'
 
   s.description      = <<-DESC
