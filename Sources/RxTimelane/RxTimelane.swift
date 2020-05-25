@@ -89,7 +89,7 @@ public extension ObservableType {
                     subscription.event(value: .cancelled, source: source)
                 }
             })
-            .subscribe()
+            .subscribe(observer.on)
             
             return Disposables.create([disposable])
         }
@@ -100,7 +100,7 @@ public extension PrimitiveSequence where Trait == SingleTrait {
     
     @available(macOS 10.14, iOS 12, tvOS 12, watchOS 5, *)
     func lane(_ name: String,
-              filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
+              filter: Timelane.LaneTypeOptions = .all,
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
               transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
@@ -109,10 +109,10 @@ public extension PrimitiveSequence where Trait == SingleTrait {
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
         
-        return Observable<Element>.create { observer in
+        return Single.create { subscribe -> Disposable in
             let subscription = Timelane.Subscription(name: name, logger: logger)
             var terminated = false
-            
+
             let disposable = self.do(onSuccess: { element in
                 lock.lock()
                 defer { lock.unlock() }
@@ -130,8 +130,7 @@ public extension PrimitiveSequence where Trait == SingleTrait {
                 if filter.contains(.event) {
                     subscription.event(value: .completion, source: source)
                 }
-            },
-            onError: { error in
+            }, onError: { error in
                 lock.lock()
                 defer { lock.unlock() }
                 
@@ -144,13 +143,11 @@ public extension PrimitiveSequence where Trait == SingleTrait {
                 if filter.contains(.event) {
                     subscription.event(value: .error(error.localizedDescription), source: source)
                 }
-            },
-            onSubscribe: {
+            }, onSubscribe: {
                 if filter.contains(.subscription) {
                     subscription.begin(source: source)
                 }
-            },
-            onDispose: {
+            }) {
                 lock.lock()
                 defer { lock.unlock() }
                 guard !terminated else { return }
@@ -163,12 +160,11 @@ public extension PrimitiveSequence where Trait == SingleTrait {
                 if filter.contains(.event) {
                     subscription.event(value: .cancelled, source: source)
                 }
-            })
-            .subscribe()
+            }
+            .subscribe(subscribe)
             
             return Disposables.create([disposable])
         }
-        .asSingle()
     }
 }
 
@@ -176,7 +172,7 @@ public extension PrimitiveSequence where Trait == CompletableTrait, Element == N
     
     @available(macOS 10.14, iOS 12, tvOS 12, watchOS 5, *)
     func lane(_ name: String,
-              filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
+              filter: Timelane.LaneTypeOptions = .all,
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
               transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
@@ -185,7 +181,7 @@ public extension PrimitiveSequence where Trait == CompletableTrait, Element == N
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
         
-        return Observable<Element>.create { observer in
+        return Completable.create { subscribe -> Disposable in
             let subscription = Timelane.Subscription(name: name, logger: logger)
             var terminated = false
             
@@ -236,11 +232,10 @@ public extension PrimitiveSequence where Trait == CompletableTrait, Element == N
                     subscription.event(value: .cancelled, source: source)
                 }
             })
-            .subscribe()
+            .subscribe(subscribe)
             
             return Disposables.create([disposable])
         }
-        .asCompletable()
     }
 }
 
@@ -248,7 +243,7 @@ public extension PrimitiveSequence where Trait == MaybeTrait {
     
     @available(macOS 10.14, iOS 12, tvOS 12, watchOS 5, *)
     func lane(_ name: String,
-              filter: Set<Timelane.LaneType> = Set(Timelane.LaneType.allCases),
+              filter: Timelane.LaneTypeOptions = .all,
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
               transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
@@ -257,7 +252,7 @@ public extension PrimitiveSequence where Trait == MaybeTrait {
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
         
-        return Observable<Element>.create { observer in
+        return Maybe.create { subscribe -> Disposable in
             let subscription = Timelane.Subscription(name: name, logger: logger)
             var terminated = false
             
@@ -313,10 +308,9 @@ public extension PrimitiveSequence where Trait == MaybeTrait {
                     subscription.event(value: .cancelled, source: source)
                 }
             })
-            .subscribe()
-                
+            .subscribe(subscribe)
+
             return Disposables.create([disposable])
         }
-        .asMaybe()
     }
 }

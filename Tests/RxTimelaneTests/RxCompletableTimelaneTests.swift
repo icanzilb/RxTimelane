@@ -73,30 +73,38 @@ final class RxCompletableTimelaneTests: XCTestCase {
 
         XCTAssertEqual(recorder.logged[1].signpostType, "end")
     }
-
-    /// Test formatting
-    func testFormatting() {
+    
+    /// Test timelane does not affect the subscription events
+    func testPasstroughSubscriptionEvents() {
         let recorder = TestLog()
         Timelane.Subscription.didEmitVersion = true
 
-        let cancellable = Single.just(3)
-            .lane("Test Subscription", filter: [.event], transformValue: { _ in return "TEST" }, logger: recorder.log)
-            .subscribe { _ in }
-
+        var recordedEvents = [String]()
+        let cancellable = Completable.empty()
+            .lane("Test Subscription", filter: .event, transformValue: { _ in "" }, logger: recorder.log)
+            .do(onCompleted: {
+                recordedEvents.append("Completed")
+            }, onSubscribe: {
+                recordedEvents.append("Subscribed")
+            }, onDispose: {
+                recordedEvents.append("Disposed")
+            })
+            .subscribe { _ in
+                // Nothing to do here
+            }
+        
         XCTAssertNotNil(cancellable)
-
-        XCTAssertEqual(recorder.logged.count, 2)
-        guard recorder.logged.count == 2 else {
-            return
-        }
-
-        XCTAssertEqual(recorder.logged[0].outputTldr, "Output, Test Subscription, TEST")
+        XCTAssertEqual(recordedEvents, [
+            "Subscribed",
+            "Completed",
+            "Disposed"
+        ])
     }
     
     static var allTests = [
         ("testEmitsEventsFromCompletingCompletable", testEmitsEventsFromCompletingCompletable),
         ("testEmitsEventsFromFailedCompletable", testEmitsEventsFromFailedCompletable),
         ("testEmitsSubscription", testEmitsSubscription),
-        ("testFormatting", testFormatting),
+        ("testPasstroughSubscriptionEvents", testPasstroughSubscriptionEvents),
     ]
 }

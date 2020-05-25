@@ -59,7 +59,7 @@ final class RxMaybeTimelaneTests: XCTestCase {
         let recorder = TestLog()
         Timelane.Subscription.didEmitVersion = true
 
-        let cancellable = Single.just(3)
+        let cancellable = Maybe.just(3)
             .lane("Test Subscription", filter: [.subscription], logger: recorder.log)
             .subscribe { _ in }
 
@@ -81,7 +81,7 @@ final class RxMaybeTimelaneTests: XCTestCase {
         let recorder = TestLog()
         Timelane.Subscription.didEmitVersion = true
 
-        let cancellable = Single.just(3)
+        let cancellable = Maybe.just(3)
             .lane("Test Subscription", filter: [.event], transformValue: { _ in return "TEST" }, logger: recorder.log)
             .subscribe { _ in }
 
@@ -95,10 +95,41 @@ final class RxMaybeTimelaneTests: XCTestCase {
         XCTAssertEqual(recorder.logged[0].outputTldr, "Output, Test Subscription, TEST")
     }
     
+    /// Test timelane does not affect the subscription events
+    func testPasstroughSubscriptionEvents() {
+        let recorder = TestLog()
+        Timelane.Subscription.didEmitVersion = true
+
+        var recordedEvents = [String]()
+        let cancellable = Maybe.just(1)
+            .lane("Test Subscription", filter: .event, transformValue: { _ in return "TEST" }, logger: recorder.log)
+            .do(onNext: { value in
+                recordedEvents.append("Value: \(value)")
+            }, onCompleted: {
+                recordedEvents.append("Completed")
+            }, onSubscribe: {
+                recordedEvents.append("Subscribed")
+            }, onDispose: {
+                recordedEvents.append("Disposed")
+            })
+            .subscribe { _ in
+                // Nothing to do here
+            }
+        
+        XCTAssertNotNil(cancellable)
+        XCTAssertEqual(recordedEvents, [
+            "Subscribed",
+            "Value: 1",
+            "Completed",
+            "Disposed"
+        ])
+    }
+    
     static var allTests = [
         ("testEmitsEventsFromCompletingMaybe", testEmitsEventsFromCompletingMaybe),
         ("testEmitsEventsFromFailedMaybe", testEmitsEventsFromFailedMaybe),
         ("testEmitsSubscription", testEmitsSubscription),
         ("testFormatting", testFormatting),
+        ("testPasstroughSubscriptionEvents", testPasstroughSubscriptionEvents),
     ]
 }

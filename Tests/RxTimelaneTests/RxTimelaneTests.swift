@@ -226,6 +226,36 @@ final class RxTimelaneTests: XCTestCase {
         XCTAssertEqual(recorder.logged[5].id, "\(initialSubscriptionCount+3)")
     }
 
+    /// Test timelane does not affect the subscription events
+    func testPasstroughSubscriptionEvents() {
+        let recorder = TestLog()
+        Timelane.Subscription.didEmitVersion = true
+
+        var recordedEvents = [String]()
+        _ = Observable<Int>.from([1, 2, 3])
+            .lane("Test Subscription", filter: .event, transformValue: { _ in return "TEST" }, logger: recorder.log)
+            .do(onNext: { value in
+                recordedEvents.append("Value: \(value)")
+            }, onCompleted: {
+                recordedEvents.append("Completed")
+            }, onSubscribe: {
+                recordedEvents.append("Subscribed")
+            }) {
+                recordedEvents.append("Disposed")
+            }
+            .subscribe { _ in
+                // Nothing to do here
+            }
+        
+        XCTAssertEqual(recordedEvents, [
+            "Subscribed",
+            "Value: 1",
+            "Value: 2",
+            "Value: 3",
+            "Completed",
+            "Disposed"
+        ])
+    }
     
     static var allTests = [
         ("testEmitsEventsFromCompletingPublisher", testEmitsEventsFromCompletingPublisher),
@@ -235,5 +265,6 @@ final class RxTimelaneTests: XCTestCase {
         ("testEmitsSubscription", testEmitsSubscription),
         ("testFormatting", testFormatting),
         ("testMultipleSubscriptions", testMultipleSubscriptions),
+        ("testPasstroughSubscriptionEvents", testPasstroughSubscriptionEvents),
     ]
 }

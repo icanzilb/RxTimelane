@@ -95,10 +95,38 @@ final class RxSingleTimelaneTests: XCTestCase {
         XCTAssertEqual(recorder.logged[0].outputTldr, "Output, Test Subscription, TEST")
     }
     
+    /// Test timelane does not affect the subscription events
+    func testPasstroughSubscriptionEvents() {
+        let recorder = TestLog()
+        Timelane.Subscription.didEmitVersion = true
+
+        var recordedEvents = [String]()
+        let cancellable = Single.just(1)
+            .lane("Test Subscription", filter: .event, transformValue: { _ in return "TEST" }, logger: recorder.log)
+            .do(onSuccess: { value in
+                recordedEvents.append("Success: \(value)")
+            }, onSubscribe: {
+                recordedEvents.append("Subscribed")
+            }, onDispose: {
+                recordedEvents.append("Disposed")
+            })
+            .subscribe { _ in
+                // Nothing to do here
+            }
+        
+        XCTAssertNotNil(cancellable)
+        XCTAssertEqual(recordedEvents, [
+            "Subscribed",
+            "Success: 1",
+            "Disposed"
+        ])
+    }
+
     static var allTests = [
         ("testEmitsEventsFromCompletingSingle", testEmitsEventsFromCompletingSingle),
         ("testEmitsEventsFromFailedSingle", testEmitsEventsFromFailedSingle),
         ("testEmitsSubscription", testEmitsSubscription),
         ("testFormatting", testFormatting),
+        ("testPasstroughSubscriptionEvents", testPasstroughSubscriptionEvents),
     ]
 }
