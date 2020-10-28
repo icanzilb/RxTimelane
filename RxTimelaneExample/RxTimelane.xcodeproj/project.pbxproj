@@ -541,7 +541,7 @@
 			repositoryURL = "https://github.com/icanzilb/TimelaneCore";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.6;
+				minimumVersion = 2.0.0;
 			};
 		};
 		BC15C600242AAA6300D8F7B5 /* XCRemoteSwiftPackageReference "RxTimelane" */ = {
@@ -549,7 +549,7 @@
 			repositoryURL = "https://github.com/icanzilb/RxTimelane";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.5;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

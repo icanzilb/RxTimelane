@@ -7,7 +7,7 @@
 ![Timelane Instrument](etc/timelane.png)
 
 <p align="center">
-    <img src="https://img.shields.io/badge/Swift-5.2-orange.svg" />
+    <img src="https://img.shields.io/badge/Swift-5.3-orange.svg" />
     <img src="https://img.shields.io/cocoapods/l/RxTimelane.svg" />
     <img src="https://img.shields.io/cocoapods/p/RxTimelane.svg" />
 </p>
@@ -22,7 +22,7 @@
 
 # Usage
 
-> Before making use of RxTimelane, you need to install the Timelane Instrument from http://timelane.tools
+> **Note:** To observe the output of using TimelaneCombine you need to install the [Timelane Instrument](https://github.com/icanzilb/Timelane/releases/latest) in advance. More information at: [http://timelane.tools](http://timelane.tools).
 
 Import the RxTimelane framework in your code:
 
@@ -80,7 +80,7 @@ I . Automatically in Xcode:
 II . Manually in your **Package.swift** file add:
 
 ```swift
-.package(url: "https://github.com/icanzilb/RxTimelane", from: "1.0.0")
+.package(url: "https://github.com/icanzilb/RxTimelane", from: "2.0.0")
 ```
 
 ## CocoaPods
@@ -88,7 +88,7 @@ II . Manually in your **Package.swift** file add:
 [CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate **RxTimelane** into your Xcode project using CocoaPods, add it to your `Podfile`:
 
 ```ruby
-pod 'RxTimelane', '~> 1.0'
+pod 'RxTimelane', '~> 2.0'
 ```
 
 ## Carthage

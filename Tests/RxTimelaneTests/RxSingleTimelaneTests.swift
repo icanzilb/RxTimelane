@@ -122,11 +122,47 @@ final class RxSingleTimelaneTests: XCTestCase {
         ])
     }
 
+    /// Test default transformation behavior
+    func testDefaultTransformValue() {
+        let recorder = TestLog()
+        Timelane.Subscription.didEmitVersion = true
+        
+        _ = Single.just("Long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long message.")
+            .lane("Test Subscription", filter: [.event], logger: recorder.log)
+            .subscribe { _ in }
+
+        XCTAssertEqual(recorder.logged.count, 2)
+        guard recorder.logged.count == 2 else {
+            return
+        }
+        
+        XCTAssertEqual(recorder.logged[0].value, "Long, long, long, long, long, long, long, long, lo...")
+    }
+
+    /// Test custom transformation behavior
+    func testCustomTransformValue() {
+        let recorder = TestLog()
+        Timelane.Subscription.didEmitVersion = true
+        
+        _ = Single.just("Long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long message.")
+            .lane("Test Subscription", filter: [.event], transformValue: { $0 }, logger: recorder.log)
+            .subscribe { _ in }
+
+        XCTAssertEqual(recorder.logged.count, 2)
+        guard recorder.logged.count == 2 else {
+            return
+        }
+        
+        XCTAssertEqual(recorder.logged[0].value, "Long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long message.")
+    }
+    
     static var allTests = [
         ("testEmitsEventsFromCompletingSingle", testEmitsEventsFromCompletingSingle),
         ("testEmitsEventsFromFailedSingle", testEmitsEventsFromFailedSingle),
         ("testEmitsSubscription", testEmitsSubscription),
         ("testFormatting", testFormatting),
         ("testPasstroughSubscriptionEvents", testPasstroughSubscriptionEvents),
+        ("testDefaultTransformValue", testDefaultTransformValue),
+        ("testCustomTransformValue", testCustomTransformValue),
     ]
 }
