@@ -81,7 +81,7 @@ final class RxCompletableTimelaneTests: XCTestCase {
 
         var recordedEvents = [String]()
         let cancellable = Completable.empty()
-            .lane("Test Subscription", filter: .event, transformValue: { _ in "" }, logger: recorder.log)
+            .lane("Test Subscription", filter: .event, logger: recorder.log)
             .do(onCompleted: {
                 recordedEvents.append("Completed")
             }, onSubscribe: {

@@ -9,29 +9,35 @@ import TimelaneCore
 
 fileprivate let lock = NSLock()
 
-/// The `lane` operator logs the subscription and its events to the Timelane Instrument.
-///
-///  - Note: You can download the Timelane Instrument from http://timelane.tools
-/// - Parameters:
-///   - name: A name for the lane when visualized in Instruments
-///   - filter: Which events to log subscriptions or data events.
-///             For example for a subscription on a subject you might be interested only in data events.
-///   - transformValue: An optional closure to format the subscription values for displaying in Instruments.
-///                     You can not only prettify the values but also change them completely, e.g. for arrays you can
-///                     it might be more useful to report the count of elements if there are a lot of them.
-///   - value: The value emitted by the subscription
 public extension ObservableType {
     
+    /// The `lane` operator logs the subscription and its events to the Timelane Instrument.
+    ///
+    /// - Note: You can download the Timelane Instrument from http://timelane.tools
+    /// - Parameters:
+    ///   - name: A name for the lane when visualized in Instruments
+    ///   - filter: Which events to log subscriptions or data events.
+    ///             For example for a subscription on a subject you might be interested only in data events.
+    ///   - file: If not specified, contains the file name where the operator is called.
+    ///   - function: If not specified, by default contains the method name where the operator is called.
+    ///   - line: If not specified, by default contains the source file line where the operator is called.
+    ///   - transformValue: An optional closure to format the subscription values for displaying in Instruments.
+    ///                     You can not only prettify the values but also change them completely, e.g. for arrays you can
+    ///                     it might be more useful to report the count of elements if there are a lot of them.
+    ///   - value: The value emitted by the subscription
     @available(macOS 10.14, iOS 12, tvOS 12, watchOS 5, *)
     func lane(_ name: String,
               filter: Timelane.LaneTypeOptions = .all,
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
-              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
+              transformValue transform: ((_ value: Element) -> String)? = nil,
               logger: @escaping Timelane.Logger = Timelane.defaultLogger) -> Observable<Element> {
         
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
+        
+        let transformer = transform ??
+            { String(describing: $0).appendingEllipsis(after: 50) }
         
         return Observable<Element>.create { observer in
             let subscription = Timelane.Subscription(name: name, logger: logger)
@@ -39,7 +45,7 @@ public extension ObservableType {
             
             let disposable = self.do(onNext: { element in
                 if filter.contains(.event) {
-                    subscription.event(value: .value(transform(element)), source: source)
+                    subscription.event(value: .value(transformer(element)), source: source)
                 }
             },
             onError: { error in
@@ -97,17 +103,34 @@ public extension ObservableType {
 }
 
 public extension PrimitiveSequence where Trait == SingleTrait {
-    
+
+    /// The `lane` operator logs the subscription and its events to the Timelane Instrument.
+    ///
+    /// - Note: You can download the Timelane Instrument from http://timelane.tools
+    /// - Parameters:
+    ///   - name: A name for the lane when visualized in Instruments
+    ///   - filter: Which events to log subscriptions or data events.
+    ///             For example for a subscription on a subject you might be interested only in data events.
+    ///   - file: If not specified, contains the file name where the operator is called.
+    ///   - function: If not specified, by default contains the method name where the operator is called.
+    ///   - line: If not specified, by default contains the source file line where the operator is called.
+    ///   - transformValue: An optional closure to format the subscription values for displaying in Instruments.
+    ///                     You can not only prettify the values but also change them completely, e.g. for arrays you can
+    ///                     it might be more useful to report the count of elements if there are a lot of them.
+    ///   - value: The value emitted by the subscription
     @available(macOS 10.14, iOS 12, tvOS 12, watchOS 5, *)
     func lane(_ name: String,
               filter: Timelane.LaneTypeOptions = .all,
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
-              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
+              transformValue transform: ((_ value: Element) -> String)? = nil,
               logger: @escaping Timelane.Logger = Timelane.defaultLogger) -> Single<Element> {
         
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
+        
+        let transformer = transform ??
+            { String(describing: $0).appendingEllipsis(after: 50) }
         
         return Single.create { subscribe -> Disposable in
             let subscription = Timelane.Subscription(name: name, logger: logger)
@@ -120,7 +143,7 @@ public extension PrimitiveSequence where Trait == SingleTrait {
                 terminated = true
                 
                 if filter.contains(.event) {
-                    subscription.event(value: .value(transform(element)), source: source)
+                    subscription.event(value: .value(transformer(element)), source: source)
                 }
                 
                 if filter.contains(.subscription) {
@@ -147,7 +170,7 @@ public extension PrimitiveSequence where Trait == SingleTrait {
                 if filter.contains(.subscription) {
                     subscription.begin(source: source)
                 }
-            }) {
+            }, onDispose:  {
                 lock.lock()
                 defer { lock.unlock() }
                 guard !terminated else { return }
@@ -160,7 +183,7 @@ public extension PrimitiveSequence where Trait == SingleTrait {
                 if filter.contains(.event) {
                     subscription.event(value: .cancelled, source: source)
                 }
-            }
+            })
             .subscribe(subscribe)
             
             return Disposables.create([disposable])
@@ -169,13 +192,22 @@ public extension PrimitiveSequence where Trait == SingleTrait {
 }
 
 public extension PrimitiveSequence where Trait == CompletableTrait, Element == Never {
-    
+    /// The `lane` operator logs the subscription and its events to the Timelane Instrument.
+    ///
+    /// - Note: You can download the Timelane Instrument from http://timelane.tools
+    /// - Parameters:
+    ///   - name: A name for the lane when visualized in Instruments
+    ///   - filter: Which events to log subscriptions or data events.
+    ///             For example for a subscription on a subject you might be interested only in data events.
+    ///   - file: If not specified, contains the file name where the operator is called.
+    ///   - function: If not specified, by default contains the method name where the operator is called.
+    ///   - line: If not specified, by default contains the source file line where the operator is called.
+    ///   - value: The value emitted by the subscription
     @available(macOS 10.14, iOS 12, tvOS 12, watchOS 5, *)
     func lane(_ name: String,
               filter: Timelane.LaneTypeOptions = .all,
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
-              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
               logger: @escaping Timelane.Logger = Timelane.defaultLogger) -> Completable {
         
         let fileName = file.description.components(separatedBy: "/").last!
@@ -240,25 +272,41 @@ public extension PrimitiveSequence where Trait == CompletableTrait, Element == N
 }
 
 public extension PrimitiveSequence where Trait == MaybeTrait {
-    
+    /// The `lane` operator logs the subscription and its events to the Timelane Instrument.
+    ///
+    /// - Note: You can download the Timelane Instrument from http://timelane.tools
+    /// - Parameters:
+    ///   - name: A name for the lane when visualized in Instruments
+    ///   - filter: Which events to log subscriptions or data events.
+    ///             For example for a subscription on a subject you might be interested only in data events.
+    ///   - file: If not specified, contains the file name where the operator is called.
+    ///   - function: If not specified, by default contains the method name where the operator is called.
+    ///   - line: If not specified, by default contains the source file line where the operator is called.
+    ///   - transformValue: An optional closure to format the subscription values for displaying in Instruments.
+    ///                     You can not only prettify the values but also change them completely, e.g. for arrays you can
+    ///                     it might be more useful to report the count of elements if there are a lot of them.
+    ///   - value: The value emitted by the subscription
     @available(macOS 10.14, iOS 12, tvOS 12, watchOS 5, *)
     func lane(_ name: String,
               filter: Timelane.LaneTypeOptions = .all,
               file: StaticString = #file,
               function: StaticString = #function, line: UInt = #line,
-              transformValue transform: @escaping (_ value: Element) -> String = { String(describing: $0) },
+              transformValue transform: ((_ value: Element) -> String)? = nil,
               logger: @escaping Timelane.Logger = Timelane.defaultLogger) -> Maybe<Element> {
       
         let fileName = file.description.components(separatedBy: "/").last!
         let source = "\(fileName):\(line) - \(function)"
-        
+
+        let transformer = transform ??
+            { String(describing: $0).appendingEllipsis(after: 50) }
+
         return Maybe.create { subscribe -> Disposable in
             let subscription = Timelane.Subscription(name: name, logger: logger)
             var terminated = false
             
             let disposable = self.do(onNext: { element in
                 if filter.contains(.event) {
-                    subscription.event(value: .value(transform(element)), source: source)
+                    subscription.event(value: .value(transformer(element)), source: source)
                 }
             },
             onError: { error in
@@ -312,5 +360,12 @@ public extension PrimitiveSequence where Trait == MaybeTrait {
 
             return Disposables.create([disposable])
         }
+    }
+}
+
+fileprivate extension String {
+    func appendingEllipsis(after: Int) -> String {
+        guard count > after else { return self }
+        return prefix(after).appending("...")
     }
 }
