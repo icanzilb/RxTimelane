@@ -533,7 +533,7 @@
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.1.0;
+				minimumVersion = 6.0.0;
 			};
 		};
 		BC15C5FD242AA8C500D8F7B5 /* XCRemoteSwiftPackageReference "TimelaneCore" */ = {
@@ -549,7 +549,7 @@
 			repositoryURL = "https://github.com/icanzilb/RxTimelane";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 3.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
