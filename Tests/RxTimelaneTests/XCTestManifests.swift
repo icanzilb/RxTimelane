@@ -7,6 +7,7 @@ public func allTests() -> [XCTestCaseEntry] {
         testCase(RxSingleTimelaneTests.allTests),
         testCase(RxCompletableTimelaneTests.allTests),
         testCase(RxMaybeTimelaneTests.allTests),
+        textCase(RxInfallibleTimelaneTests.allTests),
     ]
 }
 #endif
